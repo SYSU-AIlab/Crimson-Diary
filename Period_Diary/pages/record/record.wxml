@@ -1,0 +1,61 @@
+<!--record.wxml-->
+<view class="record-main">
+
+    <block wx:if="{{isInPeriod}}"> 
+        <view class="nextToCome">
+        
+            <view class="forcast">
+                预计下次开始日期
+            </view> 
+            <view class="left" wx:if='{{nextPeriodCount>=0}}'>
+                还剩 
+                <view class="number">{{nextPeriodCount}}</view>
+                天
+            </view>
+            <view class="left" wx:if='{{nextPeriodCount<0}}'>
+                推迟
+                <view class="number">{{-nextPeriodCount}}</view>
+                天
+            </view>
+
+        </view>
+
+        <view class="icon" wx:if="{{isInPeriod}}">
+            <image class="" src="../../icons/cola.png" mode="widthFix"/>
+        </view>
+
+        <view class="button-come">
+            <picker mode="date" class="picker" value="{{date}}" start="2019-01-01" end="{{year}}-{{month}}-{{totalDay}}" bindchange="bindDateChange">
+                大姨妈来了
+            </picker>
+        </view>
+
+    </block>
+
+    <block wx:if="{{!isInPeriod}}">
+        <view class="nextToCome">
+        
+            <view class="forcast">
+                大姨妈来了
+            </view>
+            
+            <view class="left">
+                第
+                <view class="number">{{periodCount}}</view>
+                天
+            </view>
+        </view>
+
+        <view class="icon" wx:if="{{!isInPeriod}}">
+            <image class="" src="../../icons/candy.png" mode="widthFix"/>  
+        </view>
+        <view class="button-come">
+            <picker mode="date" class="picker" value="{{date}}" start="2019-01-01" end="{{year}}-{{month}}-{{totalDay}}" bindchange="bindDateChange">
+            大姨妈走了
+            </picker>
+        </view>
+    </block>
+
+
+</view>
+  
