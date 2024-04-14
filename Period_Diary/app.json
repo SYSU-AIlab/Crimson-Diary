@@ -1,0 +1,46 @@
+{
+    "pages": [
+
+        "pages/record/record",
+        "pages/diary/diary",
+        "pages/my/my",
+        "pages/login/index",
+        "pages/record_edit/record_edit"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#ff6681",
+        "navigationBarTitleText": "Cola or Sugar",
+        "navigationBarTextStyle": "white"
+    },
+    "tabBar": {
+        "color": "#999",
+        "selectedColor": "#ff2d4a",
+        "backgroundColor": "#fafafa",
+        "position": "bottom",
+        "borderStyle": "black",
+        "list": [{
+                "pagePath": "pages/record/record",
+                "text": "记录",
+                "iconPath": "icons/record.png",
+                "selectedIconPath": "icons/record-o.png"
+            },
+            {
+                "pagePath": "pages/diary/diary",
+                "text": "日历",
+                "iconPath": "icons/diary.png",
+                "selectedIconPath": "icons/diary-o.png"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "text": "我的",
+                "iconPath": "icons/my.png",
+                "selectedIconPath": "icons/my-o.png"
+            }
+        ]
+    },
+
+
+    "style": "v2",
+    "sitemapLocation": "sitemap.json"
+}
