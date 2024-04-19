@@ -1,15 +1,19 @@
 {
-  "pages":[
+  "pages": [
     "pages/picker/picker",
     "pages/lists/lists",
-     "pages/detail/detail",
-    "pages/calendar/calendar"
+    "pages/detail/detail",
+    "pages/calendar/calendar",
+    "pages/tip1/tip1",
+    "pages/tip4/tip4",
+    "pages/tip2/tip2",
+    "pages/tip3/tip3"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FF5073",
     "navigationBarTitleText": "红潮日记",
-    "navigationBarTextStyle":"black",
+    "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },
   "tabBar": {

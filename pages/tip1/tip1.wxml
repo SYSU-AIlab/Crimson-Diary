@@ -1,0 +1,26 @@
+<view class="page-container">
+  <swiper class="swiper-container" indicator-dots="{{true}}" autoplay="{{false}}" circular="{{true}}">
+    <swiper-item wx:for="{{images}}" wx:key="index">
+      <image src="{{item}}" class="swiper-image"></image>
+    </swiper-item>
+  </swiper>
+  <view class="article">
+    <view class="title">干货🔥｜男生女生都要知道的经期小知识</view>
+    <view class="section">
+      <text class="emoji">💃</text>
+      <text>女生在经期期间，不管在坚强的女性都会变得脆弱。不仅要面临身体上的不舒服（头痛、肚子痛、拉肚子等），还要面临情绪上的变化。</text>
+    </view>
+    <view class="section">
+      <text class="emoji">💃</text>
+      <text>作为女生，我们应该对月经有清晰的了解，这样才能更好的爱自己。</text>
+    </view>
+    <view class="section">
+      <text class="emoji">🚹</text>
+      <text>作为男生，经期期间的女性是最需要呵护和疼爱的。所以男生需要了解女生在经期期间那些事情能做，哪些事情不能做。</text>
+    </view>
+    <button open-type="share" class="share-button">🔗 分享</button>
+  </view>
+  <view class="floating-button" bindtap="scrollTop">
+    <text>↑</text>
+  </view>
+</view>

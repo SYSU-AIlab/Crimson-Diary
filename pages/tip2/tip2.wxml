@@ -1,0 +1,44 @@
+<view class="page-container">
+  <swiper class="swiper-container" indicator-dots="true" autoplay="false" circular="true">
+    <swiper-item wx:for="{{images}}" wx:key="index">
+      <image src="{{item}}" class="swiper-image"></image>
+    </swiper-item>
+  </swiper>
+  <view class="article">
+    <view class="title">姨妈指南：能做和不能做的17件事（含辟谣）</view>
+    <view class="content">
+      <view class="paragraph">月经是每位女性生活中必不可少的一部分⚠️</view>
+      <view class="paragraph">都说月经是女性健康状况的「晴雨表」☔️ 它的重要性可想而知。</view>
+      <view class="paragraph">而正是如此，很多人对「姨妈」期间的各种事项都倍感小心🙅‍♀️</view>
+      <view class="paragraph">深怕惹怒了它，影响到自己的健康状况😭</view>
+      <view class="paragraph">但是总有一些谣言会误导我们，以致我们过分担心😫</view>
+      <view class="paragraph">别焦虑❗️康康今天带大家一文解答📒</view>
+    </view>
+    <view class="article">
+      <text class="highlight">👉17个月经期间能做和不能做的事情，快分享给你的闺蜜和对象一起来学习：</text>
+      <view class="list">
+        <text>1. 可以洗头吗？💁‍♀️</text>
+        <text>2. 应该适量增加哪些营养元素？🐟</text>
+        <text>3. 能去游泳吗？🏊‍♀️</text>
+        <text>4. 能够运动吗？🏃‍♀️</text>
+        <text>5. 可以吃冰淇淋、火锅、川菜等冰冷、辛辣的食物吗？🥤</text>
+        <text>6. 喝咖啡、可乐和其他碳酸饮料可以不？🍨</text>
+        <text>7. 可以利用经期时间推算自然避孕时间吗？🤰</text>
+        <text>8. 洗澡时可以用浴缸吗？🛁</text>
+        <text>9. 清洁时可以用阴道清洗液吗？👀</text>
+        <text>10. 能去献血吗？❣️</text>
+        <text>11. 能拔牙吗？😵‍</text>
+        <text>12. 能打耳洞吗？👂</text>
+        <text>13. 能不能多吃巧克力？🍫</text>
+        <text>14. 多吃红枣，会增加血量吗？🙉</text>
+        <text>15. 吃甜酒煮鸡蛋加红糖能治疗妇科病吗？🥚</text>
+        <text>16. 喝红糖水能补血吗？☕</text>
+        <text>17. 吃芒果会止血吗？🥭</text>
+      </view>
+    </view>
+    <button open-type="share" class="share-button">🔗 分享</button>
+  </view>
+  <view class="floating-button" bindtap="scrollTop">
+    <text>↑</text>
+  </view>
+</view>

@@ -1,6 +1,10 @@
 //app.js
 App({
   onLaunch: function () {
+    wx.cloud.init({
+      env: 'cloud1-8ghk237mf77b9d98', // 替换为你的环境ID
+      traceUser: true
+    });
     //调用API从本地缓存中获取数据
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
