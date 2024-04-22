@@ -1,6 +1,22 @@
 <view class="container">
   <view class="page-body">
     <view class="page-section">
+
+      <view class="weui-cells__title">请问您的年龄是多大？</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">年龄</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="bindPickerChange3" value="{{age}}" range="{{array3}}">
+              <view class="weui-input" >{{array3[age]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+
+
       <view class="weui-cells__title">您的月经大概持续几天？</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
@@ -45,5 +61,5 @@
       </view>
     </view>
   </view>
-  <button class="save_btn" bindtap="save_btn" data-array="{{array[index]}}" data-arrayb="{{array2[index2]}}" data-date="{{date}}"> 保存 </button>
+  <button class="save_btn" bindtap="save_btn" data-array="{{array[index]}}" data-arrayb="{{array2[index2]}}" data-arrayc="{{array3[age]}}" data-date="{{date}}"> 保存 </button>
 </view>

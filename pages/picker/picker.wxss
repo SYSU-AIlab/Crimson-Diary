@@ -1,17 +1,16 @@
-
 page {
   line-height: 2.0;
   font-family: -apple-system-font, "Helvetica Neue", sans-serif;
   background: #EEEEEE;
 }
 .page-body{
-  width: 80%;
-  margin-top:100px;
+  width: 90%;
+  margin-top:10px;
 }
 .save_btn{
-  width: 80%;
-  margin-top: 5%;
-  background-color: #FF5073;
+  width: 50%;
+  margin-top: 50%;
+  background-color: #505cff;
   color: #fff;
 }
 icon {
@@ -168,13 +167,16 @@ icon {
   word-wrap: break-word;
   word-break: break-all;
   font-weight: 600;
+  padding-left: 5px
 }
 .weui-input {
   height: 2.58823529em;
   min-height: 2.58823529em;
   line-height: 2.58823529em;
-  color: #FF5073;
+  color: #16161b;
   font-weight: 600;
+  text-align: right;
+  padding-right: 20px;
 }
 .weui-toptips {
   position: fixed;
