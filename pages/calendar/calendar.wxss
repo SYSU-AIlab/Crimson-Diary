@@ -7,20 +7,7 @@ page {
   height: 100%;
 }
 
-/* 下面定义左边箭头图片样式 */
-.calendar .top-handle .prev .icon image {
-  color: #ccc;
-  width: 50rpx;
-  height: 50rpx;
-  margin: 20rpx auto;
-}
-/* 下面定义左边箭头图片样式 */
-.calendar .top-handle .next .icon image {
-  color: #ccc;
-  width: 50rpx;
-  height: 50rpx;
-  margin: 20rpx auto;
-}
+
 
 .explain_wrp{
     padding: 10rpx;
