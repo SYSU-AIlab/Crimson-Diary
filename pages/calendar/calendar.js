@@ -19,7 +19,7 @@ const page = {
   getSystemInfo() {
     //获得系统数据
     const res = wx.getSystemInfoSync();
-    //console.log(res.windowWidth)
+    // console.log(res.windowHeight * res.pixelRatio || 667,res.windowWidth)
     this.setData({
       scrollViewHeight: res.windowHeight * res.pixelRatio || 667,
       canvasewidth: res.windowWidth
@@ -52,7 +52,6 @@ const page = {
         hasEmptyGrid: true,
         empytGrids
       });
-      // console.log(empytGrids)
     } else {
       this.setData({
         hasEmptyGrid: false,
@@ -163,10 +162,22 @@ const page = {
         startDateOfLastMenstrualPeriod = new Date(cur_year,cur_month,theDay+MenstrualCycle-daysOfLastMonth);
       }
     }
-    //当前年月日
+
+    // 根据日期，修正从用户获取的上一次月经日期
+    // 传参接受的年月日
     var date = new Date();
-    const day = date.getDate();
+    var presentMonth = date.getMonth()+1;
+    var presentYear = date.getFullYear();
+    var day=1
+    // 参数显示在现实的本月内：
+    if(cur_year==presentYear&&cur_month==presentMonth){
+      day = date.getDate();
+    }else{  // 非本月，一致默认为最后一天
+      day = new Date(cur_year, cur_month, 0).getDate();
+    }
+    // 传入日期
     var today = cur_year + "-" + cur_month + "-" + day;
+
     //将当月所有的日期都根据条件判断一下，然后放入不同的数组中
     var MenstrualPeriod = [];  // 月经期
     var SafePeriod = [];  // 安全期
@@ -174,10 +185,26 @@ const page = {
     var OvulationDay = [];  // 排卵日 
     // 排卵日——OvulationDay
     // 获取上次月经日
-    const lastDay=startDateOfLastMenstrualPeriod.getDate()
+    var lastDay=startDateOfLastMenstrualPeriod.getDate()
+    // 这里的lastDay需要修正，主要是年月可能不同
+    if(1){
+      const timeInterval=MenstrualCycle*24*3600*1000;
+      const dateToday=new Date(today);
+      var timeMP=startDateOfLastMenstrualPeriod.getTime();
+      while(dateToday>new Date(timeMP+timeInterval)){
+        startDateOfLastMenstrualPeriod=new Date(timeMP+timeInterval);
+        timeMP=startDateOfLastMenstrualPeriod.getTime();
+      }      
+      while(dateToday<startDateOfLastMenstrualPeriod){
+        startDateOfLastMenstrualPeriod=new Date(timeMP-timeInterval);
+        timeMP=startDateOfLastMenstrualPeriod.getTime();
+      }
+      // 重新获取上次月经日
+      var lastDay=startDateOfLastMenstrualPeriod.getDate()
+    }
 
     // 计算排卵日（我们提供的算法以排卵日为中心）
-    console.log("lastDay",lastDay)
+    // console.log("lastDay",lastDay)
     var MenstrualPeriod_test = [];  // 月经期
     var SafePeriod_test = [];  // 安全期
     var OvulationPeriod_test = [];  // 排卵期
@@ -185,10 +212,11 @@ const page = {
     // 需要两个排卵日，具体包括位于月经日以前的排卵日以及位于月经日之后的排卵日
     const thisMonthDays=new Date(cur_year, cur_month, 0).getDate();
     const lastMonthsDays=new Date(cur_year, cur_month-1, 0).getDate();
+    var OD1=-32;
+    var OD2=-32;
     if(lastDay == 1){
-      const OD1=-32;  // 前
-      const OD2=lastDay+MenstrualCycle-14;  // 后
-      console.log("OD",OD2,MenstrualCycle)
+      OD1=-32;  // 前
+      OD2=lastDay+MenstrualCycle-14;  // 后
       this.ComputePeriod(OD1,OD2,lastDay,MenstrualPeriodLength,thisMonthDays,lastMonthsDays,MenstrualPeriod_test,SafePeriod_test,OvulationPeriod_test);
       OvulationDay_test.push(OD2);
     }else{
@@ -196,9 +224,8 @@ const page = {
       // const OD1=lastDay-14>0?lastDay-14:lastDay-14+lastMonthsDays;
       // const OD2=lastDay+MenstrualCycle-14<=thisMonthDays?lastDay+MenstrualCycle-14:lastDay+MenstrualCycle-14-thisMonthDays;
       // 在传入后进行修正？
-      const OD1=lastDay-14;
-      const OD2=lastDay+MenstrualCycle-14;
-      console.log('OD', OD1, OD2,lastMonthsDays,thisMonthDays)
+      OD1=lastDay-14;
+      OD2=lastDay+MenstrualCycle-14;
       this.ComputePeriod(OD1,OD2,lastDay,MenstrualPeriodLength,thisMonthDays,lastMonthsDays,MenstrualPeriod_test,SafePeriod_test,OvulationPeriod_test);
       if(OD1>0){
         OvulationDay_test.push(OD1);
@@ -206,75 +233,36 @@ const page = {
       if(OD2<=thisMonthDays){
         OvulationDay_test.push(OD2);
       }
-      console.log(OvulationDay_test)
     }
     MenstrualPeriod=MenstrualPeriod_test;
     SafePeriod=SafePeriod_test;
     OvulationPeriod=OvulationPeriod_test;
     OvulationDay=OvulationDay_test;
-
-    // 下面是原版的改进版，但算法仍沿用的别人的，不再使用
-    // 下面的逻辑用于处理没有跨月的经期
-    for (let i = 1; i <= this.getThisMonthDays(cur_year, cur_month); i++) {
-      var iterateDay = cur_year + "-" + cur_month + "-" + i;
-      //比初始月经数据要小的日期，就使用前一次月经日期
-      if (i < lastDay) {
-        var dateDiff=(i+MenstrualCycle-lastDay)%MenstrualCycle
-        // console.log("datediff",dateDiff)
-      } else {
-        var dateDiff=(i-lastDay)%MenstrualCycle
-        // console.log("datediff",dateDiff)
-      }
-      //月经期
-      if (dateDiff < MenstrualPeriodLength) {
-        MenstrualPeriod.push(i)
-        if (today == iterateDay) {
-          canvasetext = "月经期";
-          canvaseNum = dateDiff + 1;
-          console.log('月经期',i,canvaseNum)
-        }
-      }
-      // 安全期1
-      if (MenstrualPeriodLength <= dateDiff && dateDiff < MenstrualCycle - 19) {
-        SafePeriod.push(i)
-        if (today == iterateDay) {
-          canvasetext = "安全期";
-          canvaseNum = dateDiff - MenstrualPeriodLength + 1;
-          console.log('安全期',i,canvaseNum)
-        }
-      }
-      // 排卵期
-      if (MenstrualCycle - 19 <= dateDiff && dateDiff < MenstrualCycle - 10) {
-         if(dateDiff!=MenstrualCycle-14){
-           OvulationPeriod.push(i)
-           if (today == iterateDay) {
-            canvasetext = "排卵期";
-            canvaseNum = dateDiff - MenstrualPeriodLength + 20;
-            console.log('排卵期',i,canvaseNum)
-          }
-         }
-         if(dateDiff==MenstrualCycle-14){
-            this.setData({
-              OvulationDay:i
-            })
-            if (today == iterateDay) {
-              canvasetext = "排卵日";
-              canvaseNum = dateDiff - MenstrualPeriodLength + 20;
-              console.log('排卵日',i,canvaseNum)
-            }
-        }
-      }
-      // 安全期2
-      if (MenstrualCycle - 10 <= dateDiff && dateDiff < MenstrualCycle) { // 28的周期
-        SafePeriod.push(i)
-        if (today == iterateDay) {
-          canvasetext = "安全期";
-          canvaseNum = dateDiff - MenstrualPeriodLength + 11;
-          console.log('安全期',i,canvaseNum)
-        }
-      }
-
+    // 设置canva,待测试
+    if(MenstrualPeriod.includes(date.getDate())){
+      canvasetext = "月经期";
+      canvaseNum = MenstrualPeriod.indexOf(date.getDate())+1;
     }
+    if(SafePeriod.includes(date.getDate())){
+      canvasetext = "安全期";
+      canvaseNum = 0;  // 这个有点麻烦，暂时就不管是第几天了
+    }
+    if(OvulationPeriod.includes(date.getDate())){
+      canvasetext = "排卵期";
+      if(date.getDate()>OD2){
+        canvaseNum = OvulationPeriod.indexOf(date.getDate())+2;
+      }else{
+        canvaseNum = OvulationPeriod.indexOf(date.getDate())+1;
+      }
+    }
+    if(OvulationDay.includes(date.getDate())){
+      canvasetext = "排卵日";
+      canvaseNum = 6;
+    }
+    // console.log(MenstrualPeriod)
+    // console.log(SafePeriod)
+    // console.log(OvulationPeriod)
+    // console.log(OvulationDay)
 
     this.setData({
       yue: MenstrualPeriod,
@@ -306,9 +294,9 @@ const page = {
 
     ctx.setFontSize(15)
     ctx.setFillStyle('#FFFFFF')
-    ctx.fillText(canvasetext, c2-24, c2/3-20)
-    console.log('diiaoo',c2-24, c2/3-20,c2-15, c2-40)
-    if(canvaseNum<10){
+    ctx.fillText("今天是"+canvasetext, c2-24-22.5, c2/3-20)
+    if(canvaseNum==0){
+    }else if(canvaseNum<10){
       ctx.fillText("第", c2-24, c2/3)
       ctx.fillText(canvaseNum, c2-6, c2/3)
       ctx.fillText("天", c2+6, c2/3)
