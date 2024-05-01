@@ -1,0 +1,38 @@
+<view class="page-container">
+  <swiper class="swiper-container" indicator-dots="true" autoplay="false" circular="true">
+    <swiper-item wx:for="{{images}}" wx:key="index">
+      <image src="{{item}}" class="swiper-image"></image>
+    </swiper-item>
+  </swiper>
+  <view class="article">
+    <view class="header">最佳男友在女友姨妈疼的时候都做了什么？</view>
+    <view class="content">
+      <view class="paragraph">最佳男友，绝不会在女朋友姨妈痛时只准备热水，建议直男癌患者为你的小可爱记下这些要点，女生也可以发给你的男票让他长点记性。</view>
+      <view class="paragraph"><text class="highlight">👉首先，要作战痛经，就得知道它是打哪来的：</text></view>
+      <view class="list">
+        <view>🔺前列腺素多了或者钙少了</view>
+        <view>🔺身体出了一点小毛病，必须要向医院求助</view>
+        <view>🔺被她周边的环境整出来的，甚至可能包括你</view>
+        <view>🔺你的小可爱女友自己作天作地作出来的</view>
+      </view>
+      <view class="paragraph">🌸除了那些必须去医院的，只要你给她方方面面都关照到了，你就是最佳男友没跑了！</view>
+    </view>
+  </view>
+  <view class="article">
+    <view class="paragraph"><text class="highlight">❗️❗️敲重点：作战计划</text></view>
+    <view class="paragraph">🔹第一步：把她当成你的甲方爸爸，包容她所有的坏脾气，还要使劲哄着她；</view>
+    <view class="paragraph">🔸第二步：热敷能一定程度缓解疼痛，所以不要吝啬你的钱包，暖宫贴、足浴包、痛经茶饮统统安排起来；</view>
+    <view class="paragraph">🔹第三步：虽然宠着，但也要有原则，一切生冷寒凉辛辣刺激的食物统统都要藏起来；再给她一个爱的奖励，比如来一杯热牛奶，加一条暖心小毯子。</view>
+    <view class="paragraph">🔸第四步：听说微量元素不足也会导致痛经。维生素B6了解下？当然了，适宜的运动也能帮助改善经血淤积，缓解痛经。</view>
+    <view class="paragraph">🔹第五步：中国医学博大精深，各种穴位不要太好用。拿出一点你打游戏的时间，给你的小可爱按按。</view>
+    <view class="paragraph">🔸第六步：如果你家小可爱属于中、重度痛经的话，去药店买点止痛药吧，布洛芬、拜耳小蓝片什么的都可以。当然了，记好她的周期，下次一定提前服药，提前准备起来。</view>
+  </view>
+  <view class="article">
+    <view class="paragraph"><text class="highlight2">💙</text>铛铛铛铛，看完这些并用心记下的，恭喜恭喜，男友力upupup，初级成就达成！爱她，就使劲地宠她吧，她好！你们也更好！</view>
+    <view class="paragraph"><text class="highlight2">💖</text>单身的姐妹，也要好好爱自己，照顾好自己哦</view>
+  </view>
+  <button open-type="share" class="share-button">🔗 分享</button>
+  <view class="floating-button" bindtap="scrollTop">
+    <text>↑</text>
+  </view>
+</view>

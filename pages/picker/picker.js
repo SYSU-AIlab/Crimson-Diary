@@ -4,10 +4,17 @@ const page = {
   data: {
     array: [],
     array2: [],
+    array3: [],
     date: '2016-09-01',
     index: 5,
     index2: 28,
-    tocalendar: 0
+    tocalendar: 0,
+    age:0
+  },
+  bindPickerChange3: function (e) {
+    this.setData({
+      age: e.detail.value
+    })
   },
   bindPickerChange: function (e) {
     this.setData({
@@ -30,11 +37,14 @@ const page = {
       //月经周期
       var zhouqi = wx.getStorageSync('zhouqi');
       //上次月经日期
-      var zuijinriqi = wx.getStorageSync('zuijinriqi');
-      if(jinqi!=null&&zhouqi!=null&&zuijinriqi!=null){
+      var zuijinriqi = wx.getStorageSync
+      ('zuijinriqi');
+      var nianlin = wx.getStorageSync('nianlin');
+      if(jinqi!=null&&zhouqi!=null&&zuijinriqi!=null&&nianlin!=null){
         this.setData({
           index:jinqi,
           index2:zhouqi,
+          age:nianlin,
           date:zuijinriqi
         })
       }
@@ -55,17 +65,20 @@ const page = {
     var nowday = cur_year + "-" + cur_month + "-" + day;
     var arr = []
     var arr2 = []
+    var arr3 = []
     for (let i = 0; i < 110; i++) {
       if (i < 40) {
         arr[i] = i
       }
       arr2[i] = i
+      arr3[i] = i
     }
     this.setData({
       array: arr,
       array2: arr2,
       //当天时间
-      date: nowday
+      date: nowday,
+      array3:arr3
     })
   },
 
@@ -73,7 +86,8 @@ const page = {
     const date = e.currentTarget.dataset.date
     const a = e.currentTarget.dataset.array
     const a2 = e.currentTarget.dataset.arrayb
-    console.log(date, a, a2)
+    const age = e.currentTarget.dataset.arrayc
+    console.log(date, a, a2, age)
     try {
       //经期长度
       wx.setStorageSync('jinqi', a)
@@ -81,6 +95,8 @@ const page = {
       wx.setStorageSync('zhouqi', a2)
       //最近一次月经
       wx.setStorageSync('zuijinriqi', date)
+      //年龄
+      wx.setStorageSync('nianlin', age)
     } catch (e) {
     }
 

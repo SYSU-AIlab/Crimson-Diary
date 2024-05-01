@@ -1,0 +1,36 @@
+<view class="page-container">
+  <swiper class="swiper-container" indicator-dots="true" autoplay="false" circular="true">
+    <swiper-item wx:for="{{images}}" wx:key="index">
+      <image src="{{item}}" class="swiper-image"></image>
+    </swiper-item>
+  </swiper>
+  <view class="article">
+    <view class="header">科普|月经周期与激素变化</view>
+    <view class="content">
+      <view class="paragraph">🌟🌟🌟知识点：</view>
+      <view class="paragraph"><text class="highlight">❗️❗️月经周期通常包括以下几个阶段：</text></view>
+      <view class="list">
+        <view><text class="highlight2">①月经期：</text>这是月经周期开始阶段，通常持续3到7天。在这个阶段，子宫内膜脱落，排出体外，形成月经流。这是女性出血的时间。</view>
+        <view><text class="highlight2">②卵泡期：</text>月经期结束后，卵泡期开始。在这个阶段，卵巢中的卵泡开始成长，并准备释放成熟的卵子。</view>
+        <view><text class="highlight2">③排卵期：</text>排卵期是月经周期中zui短的阶段，通常在月经周期的中间。在这个阶段，卵子从卵巢中释放出来，准备受精。这是怀孕的最佳时间，因为卵子通常在此期间很容易受孕。</view>
+        <view><text class="highlight2">④黄体期：</text>如果受精卵没有着床，黄体期将开始。在这个阶段，卵巢中的卵泡变成黄体，产生孕机素。如果没有怀孕，黄体会逐渐退化，孕机素水平下降，最终触发新的月经周期的开始。</view>
+      </view>
+    </view>
+  </view>
+  <view class="article">
+    <view class="paragraph"><text class="highlight">❗️❗️月经周期与性机素之间的关联</text></view>
+    <view class="paragraph">👩🏻‍⚕️性机素是女性生殖系统中的关键机素，主要包括雌机素（如雌二醇和雌甾醇）和孕机素（黄体酮）。这些机素在月经周期的不同阶段起着重要作用，对月经周期的调节和维持起着关键作用。</view>
+    <view class="paragraph">👨‍⚕️月经周期中性机素的主要作用和变化：</view>
+    <view class="paragraph"><text class="highlight2">🔅月经期：</text>在月经期初，雌机素水平较低。这会导致子宫内膜脱落，引发月经流。这一时期的雌机素和孕机素水平都相对较低。</view>
+    <view class="paragraph"><text class="highlight2">🔅卵泡期：</text>随着月经期的结束，卵泡期开始。在此期间，卵巢中的卵泡开始成长，并释放雌机素。雌机素的升高有助于增厚子宫内膜，为潜在的受精卵提供了适当的环境。</view>
+    <view class="paragraph"><text class="highlight2">🔅排卵期：</text>排卵期是月经周期中的高峰时期，雌机素达到顶峰，并且触发卵子从卵巢释放的过程。这是怀孕的最佳时间，因为卵子准备好与精子结合。</view>
+    <view class="paragraph"><text class="highlight2">🔅黄体期：</text>如果受精卵成功着床，黄体期开始。在此期间，卵巢中的卵泡转化为黄体，产生孕机素（主要是黄体酮）。孕机素有助于维护子宫内膜的稳定性，以支持着床和胚胎的发育。如果没有怀孕，黄体期结束，孕机素水平下降，这触发了新的月经周期的开始。</view>
+  </view>
+  <view class="article">
+    <view class="paragraph"><text class="highlight2">💙</text>这些性机素的调节和平衡是月经周期的关键因素。任何机素水平的不平衡都可能导致月经不规则、排卵问题或其他生殖健康问题。</view>
+  </view>
+  <button open-type="share" class="share-button">🔗 分享</button>
+  <view class="floating-button" bindtap="scrollTop">
+    <text>↑</text>
+  </view>
+</view>
