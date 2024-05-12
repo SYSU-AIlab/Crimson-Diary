@@ -7,7 +7,8 @@
     "pages/tip1/tip1",
     "pages/tip4/tip4",
     "pages/tip2/tip2",
-    "pages/tip3/tip3"
+    "pages/tip3/tip3",
+    "pages/call/call"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,6 +38,12 @@
         "text": "月经设置",
         "iconPath": "image/2.png",
         "selectedIconPath": "image/4.png"
+      },
+      {
+        "pagePath": "pages/call/call",
+        "text": "紧急呼叫",
+        "iconPath": "image/4.png",
+        "selectedIconPath": "image/1.png"
       }
     ]
   }
