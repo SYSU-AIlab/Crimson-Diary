@@ -88,20 +88,20 @@ const page = {
           OvulationPeriod_test.push(i)
         }
       }
-      // 计算安全期
-      var notSafe=[];
-      for (const i of MenstrualPeriod_test) {
-        notSafe.push(i)
-      }
-      for (const i of OvulationPeriod_test) {
-        notSafe.push(i)
-      }
-      notSafe.push(OD2)
-      for (let i=1; i<=thisMonthDays;i++){
-        if (!notSafe.includes(i)){
-          SafePeriod_test.push(i)
-        }
-      }
+      // // 计算安全期
+      // var notSafe=[];
+      // for (const i of MenstrualPeriod_test) {
+      //   notSafe.push(i)
+      // }
+      // for (const i of OvulationPeriod_test) {
+      //   notSafe.push(i)
+      // }
+      // notSafe.push(OD2)
+      // for (let i=1; i<=thisMonthDays;i++){
+      //   if (!notSafe.includes(i)){
+      //     SafePeriod_test.push(i)
+      //   }
+      // }
     }else{  // 不在本月1号
       // case1:上个月的排卵期延续到本月
       // case2:上个月的排卵期没有延续到本月
@@ -122,21 +122,21 @@ const page = {
           OvulationPeriod_test.push(i)
         }
       }
-      // 计算安全期
-      var notSafe=[];
-      for (const i of MenstrualPeriod_test) {
-        notSafe.push(i)
-      }
-      for (const i of OvulationPeriod_test) {
-        notSafe.push(i)
-      }
-      notSafe.push(OD1)
-      notSafe.push(OD2)
-      for (let i=1; i<=thisMonthDays;i++){
-        if (!notSafe.includes(i)){
-          SafePeriod_test.push(i)
-        }
-      }
+      // // 计算安全期
+      // var notSafe=[];
+      // for (const i of MenstrualPeriod_test) {
+      //   notSafe.push(i)
+      // }
+      // for (const i of OvulationPeriod_test) {
+      //   notSafe.push(i)
+      // }
+      // notSafe.push(OD1)
+      // notSafe.push(OD2)
+      // for (let i=1; i<=thisMonthDays;i++){
+      //   if (!notSafe.includes(i)){
+      //     SafePeriod_test.push(i)
+      //   }
+      // }
     }
   },
 
@@ -151,16 +151,6 @@ const page = {
       var startDateOfLastMenstrualPeriod = new Date(wx.getStorageSync('zuijinriqi'));
     } catch (e) {
       // Do something when catch error
-      var MenstrualPeriodLength = lastMenstrualPeriodLength;
-      var MenstrualCycle = lastMenstrualCycle;
-      // 没有获得输入时，按照统计规律、重新计算本月月经开始时间
-      var daysOfLastMonth= new Date(cur_year, cur_month-1, 0).getDate(); // 获取上个月的天数
-      var theDay = startDateOfLastMenstrualPeriod.getDate();  // 上个月的开始月经日
-      if(theDay+MenstrualCycle>daysOfLastMonth){
-        startDateOfLastMenstrualPeriod = new Date(cur_year,cur_month-1,theDay+MenstrualCycle);
-      }else{
-        startDateOfLastMenstrualPeriod = new Date(cur_year,cur_month,theDay+MenstrualCycle-daysOfLastMonth);
-      }
     }
 
     // 根据日期，修正从用户获取的上一次月经日期
@@ -172,11 +162,37 @@ const page = {
     // 参数显示在现实的本月内：
     if(cur_year==presentYear&&cur_month==presentMonth){
       day = date.getDate();
-    }else{  // 非本月，一致默认为最后一天
-      day = new Date(cur_year, cur_month, 0).getDate();
+      // 获取上次月经日
+      var lastDay=startDateOfLastMenstrualPeriod.getDate()
+    }else{  // 非本月，一致默认为第一天
+      day = 1;
+      // 传入日期
+      var today = cur_year + "-" + cur_month + "-" + day;
+      // 获取上次月经日
+      var lastDay=startDateOfLastMenstrualPeriod.getDate()
+      // 这里的lastDay需要修正,翻页的话lastDay需要改变
+      if(1){
+        const timeInterval=MenstrualCycle*24*3600*1000;
+        const dateToday=new Date(today);
+        var timeMP=startDateOfLastMenstrualPeriod.getTime();
+        // 往后翻
+        while(dateToday>startDateOfLastMenstrualPeriod){
+          startDateOfLastMenstrualPeriod=new Date(timeMP+timeInterval);
+          timeMP=startDateOfLastMenstrualPeriod.getTime();
+          // 重新获取上次月经日
+          var lastDay=startDateOfLastMenstrualPeriod.getDate()
+        } 
+        // 往前翻
+        while(dateToday<new Date(timeMP-timeInterval)){
+          startDateOfLastMenstrualPeriod=new Date(timeMP-timeInterval);
+          timeMP=startDateOfLastMenstrualPeriod.getTime();
+          // 重新获取上次月经日
+          var lastDay=startDateOfLastMenstrualPeriod.getDate()
+        }
+        // 重新获取上次月经日
+        var lastDay=startDateOfLastMenstrualPeriod.getDate()
+      }
     }
-    // 传入日期
-    var today = cur_year + "-" + cur_month + "-" + day;
 
     //将当月所有的日期都根据条件判断一下，然后放入不同的数组中
     var MenstrualPeriod = [];  // 月经期
@@ -184,31 +200,12 @@ const page = {
     var OvulationPeriod = [];  // 排卵期
     var OvulationDay = [];  // 排卵日 
     // 排卵日——OvulationDay
-    // 获取上次月经日
-    var lastDay=startDateOfLastMenstrualPeriod.getDate()
-    // 这里的lastDay需要修正，主要是年月可能不同
-    if(1){
-      const timeInterval=MenstrualCycle*24*3600*1000;
-      const dateToday=new Date(today);
-      var timeMP=startDateOfLastMenstrualPeriod.getTime();
-      while(dateToday>new Date(timeMP+timeInterval)){
-        startDateOfLastMenstrualPeriod=new Date(timeMP+timeInterval);
-        timeMP=startDateOfLastMenstrualPeriod.getTime();
-      }      
-      while(dateToday<startDateOfLastMenstrualPeriod){
-        startDateOfLastMenstrualPeriod=new Date(timeMP-timeInterval);
-        timeMP=startDateOfLastMenstrualPeriod.getTime();
-      }
-      // 重新获取上次月经日
-      var lastDay=startDateOfLastMenstrualPeriod.getDate()
-    }
-
     // 计算排卵日（我们提供的算法以排卵日为中心）
-    // console.log("lastDay",lastDay)
-    var MenstrualPeriod_test = [];  // 月经期
+    var MenstrualPeriod_test = [];  // 月经期      // 有可能有两组月经期，靠
     var SafePeriod_test = [];  // 安全期
     var OvulationPeriod_test = [];  // 排卵期
     var OvulationDay_test = [];  // 排卵日，最多有两个，至少有一个
+
     // 需要两个排卵日，具体包括位于月经日以前的排卵日以及位于月经日之后的排卵日
     const thisMonthDays=new Date(cur_year, cur_month, 0).getDate();
     const lastMonthsDays=new Date(cur_year, cur_month-1, 0).getDate();
@@ -216,16 +213,16 @@ const page = {
     var OD2=-32;
     if(lastDay == 1){
       OD1=-32;  // 前
-      OD2=lastDay+MenstrualCycle-14;  // 后
+      OD2=Math.floor((lastDay+MenstrualCycle+lastDay)/2);  // 后
       this.ComputePeriod(OD1,OD2,lastDay,MenstrualPeriodLength,thisMonthDays,lastMonthsDays,MenstrualPeriod_test,SafePeriod_test,OvulationPeriod_test);
       OvulationDay_test.push(OD2);
     }else{
       // // 在传入前进行修正？
       // const OD1=lastDay-14>0?lastDay-14:lastDay-14+lastMonthsDays;
       // const OD2=lastDay+MenstrualCycle-14<=thisMonthDays?lastDay+MenstrualCycle-14:lastDay+MenstrualCycle-14-thisMonthDays;
-      // 在传入后进行修正？
-      OD1=lastDay-14;
-      OD2=lastDay+MenstrualCycle-14;
+      // 在传入后进行修正？V
+      OD1=Math.floor((lastDay-+MenstrualCycle+lastDay)/2);
+      OD2=Math.floor((lastDay+MenstrualCycle+lastDay)/2);  // 后
       this.ComputePeriod(OD1,OD2,lastDay,MenstrualPeriodLength,thisMonthDays,lastMonthsDays,MenstrualPeriod_test,SafePeriod_test,OvulationPeriod_test);
       if(OD1>0){
         OvulationDay_test.push(OD1);
@@ -234,6 +231,36 @@ const page = {
         OvulationDay_test.push(OD2);
       }
     }
+    // 补充一个月两个月经期的情况
+    if (lastDay+MenstrualCycle<=thisMonthDays){
+      for(let i = lastDay+MenstrualCycle; i<lastDay+MenstrualCycle+MenstrualPeriodLength;i++){
+        if(i<=thisMonthDays){
+          MenstrualPeriod_test.push(i)
+        }
+        else
+          break
+      }
+    }
+    // 计算安全期
+    var notSafe=[];
+    for (const i of MenstrualPeriod_test) {
+      notSafe.push(i)
+    }
+    for (const i of OvulationPeriod_test) {
+      notSafe.push(i)
+    }
+    notSafe.push(OD1)
+    notSafe.push(OD2)
+    for (let i=1; i<=thisMonthDays;i++){
+      if (!notSafe.includes(i)){
+        SafePeriod_test.push(i)
+      }
+    }
+
+    // console.log(MenstrualPeriod_test)
+    // console.log(SafePeriod_test)
+    // console.log(OvulationPeriod_test)
+
     MenstrualPeriod=MenstrualPeriod_test;
     SafePeriod=SafePeriod_test;
     OvulationPeriod=OvulationPeriod_test;
@@ -259,10 +286,6 @@ const page = {
       canvasetext = "排卵日";
       canvaseNum = 6;
     }
-    // console.log(MenstrualPeriod)
-    // console.log(SafePeriod)
-    // console.log(OvulationPeriod)
-    // console.log(OvulationDay)
 
     this.setData({
       yue: MenstrualPeriod,
