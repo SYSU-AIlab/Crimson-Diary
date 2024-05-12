@@ -1,0 +1,16 @@
+<!--pages/call.wxml-->
+<view class="container">
+  <view class="page-body">
+  <view class="page-section">
+  <view class="iptwarp">
+    <view class="flex_y_center border">
+      <view class="ipt_key" align-items:="center">电话号码</view>
+        <input class="flex_1" placeholder="请输入您的联系方式" type="number" bindinput="bindinput" value="" data-key="tel">
+        </input>
+    </view>
+    <button hover-class="none" class="submit" catchtap="submit">更新紧急联系人</button>
+    <button hover-class="none" class="sos" catchtap="sos">紧急呼叫</button>
+  </view>
+  </view>
+  </view>
+</view>
