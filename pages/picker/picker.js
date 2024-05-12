@@ -66,13 +66,12 @@ const page = {
     var arr = []
     var arr2 = []
     var arr3 = []
-    for (let i = 0; i < 110; i++) {
-      if (i < 40) {
-        arr[i] = i
-      }
-      arr2[i] = i
-      arr3[i] = i
-    }
+    for (let i = 3; i < 11; i++){ arr[i] = i}
+    for (let i = 21; i < 36; i++){ arr2[i] = i}
+    for (let i = 0; i < 110; i++) {arr3[i] = i}
+    arr = arr.filter(item => item !== null);
+    arr2 = arr2.filter(item => item !== null);
+    arr3 = arr3.filter(item => item !== null);
     this.setData({
       array: arr,
       array2: arr2,

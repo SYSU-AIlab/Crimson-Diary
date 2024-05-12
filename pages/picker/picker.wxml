@@ -53,7 +53,7 @@
           </view>
           <view class="weui-cell__bd">
           <!--滚轮范围是2015.9.1到当天的日期-->
-            <picker mode="date" value="{{date}}" start="2015-09-01" end="{{date}}" bindchange="bindDateChange">
+            <picker mode="date" value="{{date}}" start="2015-09-01"  bindchange="bindDateChange">
               <view class="weui-input">{{date}}</view>
             </picker>
           </view>
