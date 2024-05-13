@@ -68,7 +68,7 @@
       </view>
       <view class="flex-wrp explain_wrp">
         <view class="flex-item color_L color_pai border-radius"></view>
-        <text class="color_pai_text">排卵期</text>
+        <text class="color_pai_text">排卵日</text>
       </view>
     </view>
   </view>
