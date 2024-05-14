@@ -13,4 +13,11 @@
   </view>
   </view>
   </view>
+  <scroll-view class="district-list" scroll-y="true">
+    <block wx:for="{{districts}}" wx:key="*this">
+      <view class="district-item" bindtap="selectDistrict" data-district="{{item}}">
+        {{item}}
+      </view>
+    </block>
+  </scroll-view>
 </view>
