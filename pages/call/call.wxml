@@ -1,23 +1,35 @@
-<!--pages/call.wxml-->
+<!-- pages/call/call.wxml -->
 <view class="container">
-  <view class="page-body">
-  <view class="page-section">
-  <view class="iptwarp">
-    <view class="flex_y_center border">
-      <view class="ipt_key" align-items:="center">电话号码</view>
-        <input class="flex_1" placeholder="请输入您的联系方式" type="number" bindinput="bindinput" value="" data-key="tel">
-        </input>
-    </view>
-    <button hover-class="none" class="submit" catchtap="submit">更新紧急联系人</button>
-    <button hover-class="none" class="sos" catchtap="sos">紧急呼叫</button>
+  <input class="phone-input" type="text" placeholder="请输入手机号码" data-key="tel" bindinput="bindinput"/>
+  <button class="submit-button" bindtap="submit">提交</button>
+  <button class="sos-button" bindtap="sos">紧急呼叫</button>
+  <view class="picker" bindtap="toggleDistricts">
+    选择区县: {{selectedDistrict ? selectedDistrict : '请选择'}}
   </view>
-  </view>
-  </view>
-  <scroll-view class="district-list" scroll-y="true">
+  
+  <view class="districts" wx:if="{{showDistricts}}">
     <block wx:for="{{districts}}" wx:key="*this">
-      <view class="district-item" bindtap="selectDistrict" data-district="{{item}}">
+      <view class="district" bindtap="selectDistrict" data-district="{{item}}">
         {{item}}
       </view>
     </block>
-  </scroll-view>
+  </view>
+
+  <view class="hospitals">
+    <block wx:for="{{districtHospitals}}" wx:key="*this">
+      <view>
+        <view class="hospital" bindtap="selectHospital" data-index="{{index}}">
+          {{item.hospital_name}}
+        </view>
+        <view class="hospital-details" wx:if="{{selectedHospital && selectedHospital.hospital_name === item.hospital_name}}">
+          <view>医院名称: {{selectedHospital.hospital_name}}</view>
+          <view>医院地址: {{selectedHospital.hospital_address}}</view>
+          <view>联系电话: {{selectedHospital.phone_number}}</view>
+          <view>医院等级: {{selectedHospital.hospital_grade}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  
 </view>
