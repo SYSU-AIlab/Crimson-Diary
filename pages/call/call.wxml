@@ -4,7 +4,7 @@
   <button class="submit-button" bindtap="submit">提交</button>
   <button class="sos-button" bindtap="sos">紧急呼叫</button>
   <view class="picker" bindtap="toggleDistricts">
-    选择区县: {{selectedDistrict ? selectedDistrict : '请选择'}}
+    选择杭州市的区县: {{selectedDistrict ? selectedDistrict : '请选择'}}
   </view>
   
   <view class="districts" wx:if="{{showDistricts}}">
