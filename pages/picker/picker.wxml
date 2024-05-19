@@ -9,7 +9,7 @@
             <view class="weui-label">年龄</view>
           </view>
           <view class="weui-cell__bd">
-            <picker bindchange="bindPickerChange3" value="{{age}}" range="{{array3}}">
+            <picker bindchange="bindPickerChange3" value="{{array3[age]}}" range="{{array3}}">
               <view class="weui-input" >{{array3[age]}}</view>
             </picker>
           </view>
@@ -61,5 +61,5 @@
       </view>
     </view>
   </view>
-  <button class="save_btn" bindtap="save_btn" data-array="{{array[index]}}" data-arrayb="{{array2[index2]}}" data-arrayc="{{array3[age]}}" data-date="{{date}}"> 保存 </button>
+  <button class="save_btn" bindtap="save_btn" data-jingqi_index="{{index}}" data-jinqi="{{array[index]}}" data-zhouqi_index="{{index2}}" data-zhouqi="{{array2[index2]}}"data-age_index="{{age}}" data-date="{{date}}"> 保存 </button>
 </view>

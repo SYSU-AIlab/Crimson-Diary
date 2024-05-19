@@ -33,18 +33,18 @@ const page = {
   },
   onShow: function(){
     // 获取缓存数据
-    const jinqi = wx.getStorageSync('jinqi');
-    const zhouqi = wx.getStorageSync('zhouqi');
-    const zuijinriqi = wx.getStorageSync('zuijinriqi');
-    const nianlin = wx.getStorageSync('nianlin');
+    var jingqi_index = wx.getStorageSync('jinqi_index');
+    var zhouqi_index = wx.getStorageSync('zhouqi_index');
+    var zuijinriqi = wx.getStorageSync('zuijinriqi');
+    var nianlin_index = wx.getStorageSync('nianlin_index');
   
     // 数据完整性检查，并设置默认值
-    if (jinqi !== null && zhouqi !== null && zuijinriqi !== null && nianlin !== null) {
-      console.log("show data")
+    if (jingqi_index !== null && zhouqi_index !== null && zuijinriqi !== null && nianlin_index !== null) {
+      console.log("show data", jingqi_index, zhouqi_index, zuijinriqi, nianlin_index)
       this.setData({
-        index: jinqi,
-        index2: zhouqi,
-        age: nianlin,
+        index: jingqi_index,
+        index2: zhouqi_index,
+        age: nianlin_index,
         date: zuijinriqi
       });
     } else {
@@ -72,7 +72,7 @@ const page = {
     const cur_month = date.getMonth() + 1;
     const day = date.getDate();
     var nowday = cur_year + "-" + cur_month + "-" + day;
-    console.log('test1:',date,cur_month,cur_year,day);
+    // console.log('test1:',date,cur_month,cur_year,day);
     var arr = []
     var arr2 = []
     var arr3 = []
@@ -90,19 +90,23 @@ const page = {
 
   save_btn(e) {
     const date = e.currentTarget.dataset.date
-    const a = e.currentTarget.dataset.array
-    const a2 = e.currentTarget.dataset.arrayb
-    const age = e.currentTarget.dataset.arrayc
-    console.log('save_btn',date, a, a2, age)
+    const index_jingqi = e.currentTarget.dataset.jingqi_index
+    const index_zhouqi = e.currentTarget.dataset.zhouqi_index
+    const index_age = e.currentTarget.dataset.age_index
+    const jinqi = e.currentTarget.dataset.jinqi
+    const zhouqi = e.currentTarget.dataset.zhouqi
+    console.log('save_btn',date, index_jingqi, index_zhouqi, index_age)
     try {
       //经期长度
-      wx.setStorageSync('jinqi', a)
+      wx.setStorageSync('jinqi_index', index_jingqi)
+      wx.setStorageSync('jinqi', jinqi)
       //周期长度
-      wx.setStorageSync('zhouqi', a2)
+      wx.setStorageSync('zhouqi_index', index_zhouqi)
+      wx.setStorageSync('zhouqi', zhouqi)
       //最近一次月经
       wx.setStorageSync('zuijinriqi', date)
       //年龄
-      wx.setStorageSync('nianlin', age)
+      wx.setStorageSync('nianlin_index', index_age)
     } catch (e) {
       console.warn("save fail.")
     }
