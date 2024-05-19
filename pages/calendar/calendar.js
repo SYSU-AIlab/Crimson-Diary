@@ -83,8 +83,10 @@ const page = {
       var MenstrualCycle = wx.getStorageSync('zhouqi');
       //上次月经日期
       var startDateOfLastMenstrualPeriod = new Date(wx.getStorageSync('zuijinriqi'));
+      console.log('test2',MenstrualPeriodLength,MenstrualCycle,startDateOfLastMenstrualPeriod);
     } catch (e) {
       // Do something when catch error
+      console.error("Error retrieving data from storage:", e);
     }
     // 现在的日期
     var date = new Date();
@@ -144,9 +146,9 @@ const page = {
 
             // 更新月经开始时间
             startDateOfLastMenstrualPeriod=new Date(timeMP+timeInterval);
-            console.log("1",startDateOfLastMenstrualPeriod)
+            console.log("startDateOfLastMenstrualPeriod",startDateOfLastMenstrualPeriod)
             timeMP=startDateOfLastMenstrualPeriod.getTime();
-            console.log("1",lastDay)
+            console.log("lastDay",lastDay)
           } 
         }
         // 往前翻，这里修改的逻辑————也是逐一减去周期，直到超过参考标准
