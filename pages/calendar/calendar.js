@@ -11,7 +11,7 @@ const page = {
     anquan: [],
     weixian: [],
     pailuanri: [],
-    canvasewidth: 375,
+    canvasewidth: 70,
     // OvulationDay:0
   },
 
@@ -24,7 +24,6 @@ const page = {
       scrollViewHeight: res.windowHeight * res.pixelRatio || 667,
       canvasewidth: res.windowWidth
     });
-
     return res.windowWidth;
   },
 
@@ -313,6 +312,7 @@ const page = {
     SafePeriod=SafePeriod_test;
     OvulationPeriod=OvulationPeriod_test;
     OvulationDay=OvulationDay_test;
+    console.log(OvulationDay)
     // 设置canva,待测试
     if(MenstrualPeriod.includes(date.getDate())){
       canvasetext = "月经期";
@@ -355,28 +355,60 @@ const page = {
     this.viewyue(cur_year, cur_month)
 
     var canvasewidth = this.getSystemInfo()
-    //canvas绘图
-    const ctx = wx.createCanvasContext('ayuCanvas')
-    var c2 = canvasewidth / 2
-    // Draw coordinates
-    ctx.arc(c2, -c2 * 2, c2 * 3, 0, 2 * Math.PI)
-    ctx.setFillStyle('#FF5073')
-    ctx.fill()
+    console.log(canvasewidth)
+    // 参考微信小程序官方文档，将停止维护的旧版canvas 迁移到canvas2D
+    // 画布大小初始化
+    wx.createSelectorQuery()
+      .select('#TodayAttribute') // 在 WXML 中填入的 id
+      .fields({ node: true, size: true })
+      .exec((res) => {
+          // Canvas 对象
+          console.log(res)
+          const canvas = res[0].node
+          // Canvas 画布的实际绘制宽高
+          const renderWidth = res[0].width
+          const renderHeight = res[0].height
+          console.log(renderWidth)
+          // Canvas 绘制上下文
+          var ctx = canvas.getContext('2d')
 
-    ctx.setFontSize(15)
-    ctx.setFillStyle('#FFFFFF')
-    ctx.fillText("今天是"+canvasetext, c2-24-22.5, c2/3-20)
-    if(canvaseNum==0){
-    }else if(canvaseNum<10){
-      ctx.fillText("第", c2-24, c2/3)
-      ctx.fillText(canvaseNum, c2-6, c2/3)
-      ctx.fillText("天", c2+6, c2/3)
-    }else{
-      ctx.fillText("第", c2-24, c2/3)
-      ctx.fillText(canvaseNum, c2-6, c2/3)
-      ctx.fillText("天", c2+15, c2/3)
-    }
-    ctx.draw()
+          // 初始化画布大小
+          const dpr = wx.getWindowInfo().pixelRatio
+          console.log(dpr)
+          canvas.width = renderWidth * dpr
+          canvas.height = renderHeight * dpr
+          
+          // 绘制前清空画布
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+          // 若干绘制调用
+          // ctx.fillRect(0, 0, 50, 50)
+          var c2 = canvas.width / 2
+          //Draw coordinates
+          ctx.arc(c2, -c2 * 2, c2 * 3, 0, 2 * Math.PI)
+          ctx.fillStyle = '#FF5073'
+          ctx.fill()
+          // ctx.draw(20, 20, 50, 50)
+          ctx.font="60px Arial"
+          // ctx.setFillStyle('#FFFFFF')
+          ctx.fillStyle = '#FFFFFF'
+    
+          ctx.fillText("今天是"+canvasetext, c2*11/16, c2/10)
+          console.log(c2)
+          // ctx.fillText("今天是"+canvasetext, c2, 50)
+          if(canvaseNum==0){
+          }else if(canvaseNum<10){
+            ctx.fillText("第", c2*14/16, c2*5/20)
+            ctx.fillText(canvaseNum, c2, c2*5/20)
+            ctx.fillText("天", c2*17/16, c2*5/20)
+            }else{
+              ctx.fillText("第", c2*12/16, c2*5/20)
+              ctx.fillText(canvaseNum, c2, c2*5/20)
+              ctx.fillText("天", c2*18/16, c2*5/20)
+            }
+            ctx.scale(dpr, dpr)
+            // ctx.fill()
+            // ctx.fillRect(0, 0, 50, 50)
+      })
 
     const weeks_ch = ['日', '一', '二', '三', '四', '五', '六'];
     //调用calculateEmptyGrids计算出当月空出几个格子，传入年和月

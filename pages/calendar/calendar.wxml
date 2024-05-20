@@ -1,5 +1,5 @@
-<canvas style="width:{{canvasewidth}}px; height:{{canvasewidth/2}}px;" canvas-id="ayuCanvas"></canvas>
-<canvas canvas-id="ayuCanvas" type="2d"></canvas>
+<canvas style="width:{{canvasewidth}}px; height:{{canvasewidth/2}}px;" id="TodayAttribute" type = "2d"></canvas>
+<!-- <canvas canvas-id="TodayAttribute" type="2d"></canvas> -->
 
 
 <!--月经日历-->
