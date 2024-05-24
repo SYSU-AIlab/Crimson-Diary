@@ -239,7 +239,7 @@ page {
   position: relative;
   left: 0;
   top: 0;
-  color: #B4D667;
+  color: #c087b5;
   font-weight: bold; /* 设置字体加粗 */
   font-size: 40rpx; /* 设置字体大小 */
 }
@@ -248,7 +248,7 @@ page {
   position: relative;
   left: 0;
   top: 0;
-  color: #c087b5;
+  color: #B4D667;
   font-weight: bold; /* 设置字体加粗 */
   font-size: 40rpx; /* 设置字体大小 */
 }
