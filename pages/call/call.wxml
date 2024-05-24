@@ -1,8 +1,12 @@
 <!-- pages/call/call.wxml -->
 <view class="container">
+  <image class="bg-image" src="cloud://cloud1-8ghk237mf77b9d98.636c-cloud1-8ghk237mf77b9d98-1325635063/image/bg/20.jpg" mode="aspectFill" style="opacity: 0.5;"></image>
   <input class="phone-input" type="text" placeholder="请输入手机号码" data-key="tel" bindinput="bindinput"/>
   <button class="submit-button" bindtap="submit">提交</button>
   <button class="sos-button" bindtap="sos">紧急呼叫</button>
+  <view class="explaination">
+    <text class="exp_words">（填入紧急联系电话，并提交，下次在遇到紧急情况时，点击上方紧急呼救即可立即拨打哦）</text>
+  </view>
   <view class="picker" bindtap="toggleDistricts">
     选择杭州市的区县: {{selectedDistrict ? selectedDistrict : '请选择'}}
   </view>
