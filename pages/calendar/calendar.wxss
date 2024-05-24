@@ -46,10 +46,10 @@ page {
     font-weight: bold; /* 设置字体加粗 */
 }
 .color_wei{
-    background-color:#c087b5;
+    background-color:#6dd9e0;
 }
 .color_wei_text{
-    color:#c087b5;
+    color:#6dd9e0;
     font-weight: bold; /* 设置字体加粗 */
 }
 .color_pai{
@@ -239,7 +239,7 @@ page {
   position: relative;
   left: 0;
   top: 0;
-  color: #c087b5;
+  color: #6dd9e0;
   font-weight: bold; /* 设置字体加粗 */
   font-size: 40rpx; /* 设置字体大小 */
 }
