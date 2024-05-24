@@ -259,7 +259,7 @@ page {
   top: 0;
   color: #f1c343;
   font-weight: bold; /* 设置字体加粗 */
-  font-size: 20px; /* 设置字体大小 */
+  font-size: 40rpx; /* 设置字体大小 */
 }
 .border-radius{
   border-radius: 50%;
