@@ -12,7 +12,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FF5073",
+    "navigationBarBackgroundColor": "#FFE4E1",
     "navigationBarTitleText": "红潮日记",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
@@ -24,26 +24,26 @@
       {
         "pagePath": "pages/calendar/calendar",
         "text": "月经记录",
-        "iconPath": "image/1.png",
-        "selectedIconPath": "image/2.png"
+        "iconPath": "image/日历_calendar.png",
+        "selectedIconPath": "image/日历_calendar (1).png"
       },
       {
         "pagePath": "pages/lists/lists",
         "text": "月经知识",
-        "iconPath": "image/3.png",
-        "selectedIconPath": "image/4.png"
+        "iconPath": "image/书籍1_book-one.png",
+        "selectedIconPath": "image/书籍1_book-one (1).png"
       },
       {
         "pagePath": "pages/picker/picker",
         "text": "月经设置",
-        "iconPath": "image/2.png",
-        "selectedIconPath": "image/4.png"
+        "iconPath": "image/设置_setting.png",
+        "selectedIconPath": "image/设置_setting (1).png"
       },
       {
         "pagePath": "pages/call/call",
         "text": "紧急呼叫",
-        "iconPath": "image/4.png",
-        "selectedIconPath": "image/1.png"
+        "iconPath": "image/电话呼叫_phone-call.png",
+        "selectedIconPath": "image/电话呼叫_phone-call (1).png"
       }
     ]
   }
