@@ -11,7 +11,7 @@ const page = {
     anquan: [],
     weixian: [],
     pailuanri: [],
-    canvasewidth: 70,
+    canvasewidth: 375,
     // OvulationDay:0
   },
 
@@ -24,6 +24,7 @@ const page = {
       scrollViewHeight: res.windowHeight * res.pixelRatio || 667,
       canvasewidth: res.windowWidth
     });
+
     return res.windowWidth;
   },
 
@@ -82,10 +83,8 @@ const page = {
       var MenstrualCycle = wx.getStorageSync('zhouqi');
       //上次月经日期
       var startDateOfLastMenstrualPeriod = new Date(wx.getStorageSync('zuijinriqi'));
-      console.log('test2',MenstrualPeriodLength,MenstrualCycle,startDateOfLastMenstrualPeriod);
     } catch (e) {
       // Do something when catch error
-      console.error("Error retrieving data from storage:", e);
     }
     // 现在的日期
     var date = new Date();
@@ -145,9 +144,9 @@ const page = {
 
             // 更新月经开始时间
             startDateOfLastMenstrualPeriod=new Date(timeMP+timeInterval);
-            console.log("startDateOfLastMenstrualPeriod",startDateOfLastMenstrualPeriod)
+            // console.log("1",startDateOfLastMenstrualPeriod)
             timeMP=startDateOfLastMenstrualPeriod.getTime();
-            console.log("lastDay",lastDay)
+            // console.log("1",lastDay)
           } 
         }
         // 往前翻，这里修改的逻辑————也是逐一减去周期，直到超过参考标准
@@ -164,9 +163,9 @@ const page = {
           while(new Date(timeMP-timeInterval)>dateToday){
             // 重新获取上次月经日
             startDateOfLastMenstrualPeriod=new Date(timeMP-timeInterval);
-            console.log("2",startDateOfLastMenstrualPeriod)
+            // console.log("2",startDateOfLastMenstrualPeriod)
             timeMP=startDateOfLastMenstrualPeriod.getTime();
-            console.log("2",lastDay)
+            // console.log("2",lastDay)
             // 下面这个变量用于补充上个月经期的遗漏量，注意这里的逻辑也是不一样的，注意想清楚
             var startDateOfLastMenstrualPeriod_=new Date(timeMP-timeInterval);  // 这个变量主要用于计算lastDay_continue
             var lastDay_continue=startDateOfLastMenstrualPeriod_.getDate()
@@ -191,8 +190,8 @@ const page = {
       }
     }
     
-    console.log("lastDay",lastDay)
-    console.log("lastDay_continue",lastDay_continue)
+    // console.log("lastDay",lastDay)
+    // console.log("lastDay_continue",lastDay_continue)
 
     //将当月所有的日期都根据条件判断一下，然后放入不同的数组中
     var MenstrualPeriod = [];  // 月经期
@@ -219,12 +218,12 @@ const page = {
       var OD2=Math.floor((MenstrualCycle)/2+lastDay)  // 记得取整
       // 排卵日3，下一次月经开始时间与下下个月月经开始时间的中间时间
       var OD3=Math.floor(3*(MenstrualCycle)/2+lastDay)
-      console.log("OD1",OD1,OD2,OD3)
+      // console.log("OD1",OD1,OD2,OD3)
     }else{ // 本月没有月经开始日，那么只能依靠lastDay_continue了
       var OD1=Math.floor((MenstrualCycle)/2+lastDay_continue)-lastMonthsDays
       var OD2=Math.floor(3*(MenstrualCycle)/2+lastDay_continue)-lastMonthsDays
       var OD3=Math.floor(5*(MenstrualCycle)/2+lastDay_continue)-lastMonthsDays
-      console.log("OD2",OD1,OD2,OD3)      
+      // console.log("OD2",OD1,OD2,OD3)      
     }
     
     // 将排卵日添加入数组中
@@ -237,7 +236,7 @@ const page = {
     if(OD3>0&&OD3<=thisMonthDays){
       OvulationDay_test.push(OD3)
     }
-    console.log("OvulationDay_test",OvulationDay_test)
+    // console.log("OvulationDay_test",OvulationDay_test)
     // 2、解决上个月遗留问题（排卵期）
     // 补充上个月的经期遗留问题
     if((lastDay_continue+MenstrualPeriodLength-lastMonthsDays)>0&&lastDay_continue!=1000){
@@ -284,7 +283,7 @@ const page = {
       }
     }
     
-    console.log("OvulationPeriod",OvulationPeriod_test)
+    // console.log("OvulationPeriod",OvulationPeriod_test)
     
     // 7、计算本月的安全期
     // 计算安全期
@@ -304,15 +303,14 @@ const page = {
       }
     }
 
-    console.log("MenstrualPeriod_test",MenstrualPeriod_test)
-    console.log("SafePeriod_test",SafePeriod_test)
-    console.log("OvulationPeriod_test",OvulationPeriod_test)
+    // console.log("MenstrualPeriod_test",MenstrualPeriod_test)
+    // console.log("SafePeriod_test",SafePeriod_test)
+    // console.log("OvulationPeriod_test",OvulationPeriod_test)
 
     MenstrualPeriod=MenstrualPeriod_test;
     SafePeriod=SafePeriod_test;
     OvulationPeriod=OvulationPeriod_test;
     OvulationDay=OvulationDay_test;
-    console.log(OvulationDay)
     // 设置canva,待测试
     if(MenstrualPeriod.includes(date.getDate())){
       canvasetext = "月经期";
@@ -355,60 +353,28 @@ const page = {
     this.viewyue(cur_year, cur_month)
 
     var canvasewidth = this.getSystemInfo()
-    console.log(canvasewidth)
-    // 参考微信小程序官方文档，将停止维护的旧版canvas 迁移到canvas2D
-    // 画布大小初始化
-    wx.createSelectorQuery()
-      .select('#TodayAttribute') // 在 WXML 中填入的 id
-      .fields({ node: true, size: true })
-      .exec((res) => {
-          // Canvas 对象
-          console.log(res)
-          const canvas = res[0].node
-          // Canvas 画布的实际绘制宽高
-          const renderWidth = res[0].width
-          const renderHeight = res[0].height
-          console.log(renderWidth)
-          // Canvas 绘制上下文
-          var ctx = canvas.getContext('2d')
+    //canvas绘图
+    const ctx = wx.createCanvasContext('ayuCanvas')
+    var c2 = canvasewidth / 2
+    // Draw coordinates
+    ctx.arc(c2, -c2 * 2, c2 * 3, 0, 2 * Math.PI)
+    ctx.setFillStyle('#FF5073')
+    ctx.fill()
 
-          // 初始化画布大小
-          const dpr = wx.getWindowInfo().pixelRatio
-          console.log(dpr)
-          canvas.width = renderWidth * dpr
-          canvas.height = renderHeight * dpr
-          
-          // 绘制前清空画布
-          ctx.clearRect(0, 0, canvas.width, canvas.height)
-          // 若干绘制调用
-          // ctx.fillRect(0, 0, 50, 50)
-          var c2 = canvas.width / 2
-          //Draw coordinates
-          ctx.arc(c2, -c2 * 2, c2 * 3, 0, 2 * Math.PI)
-          ctx.fillStyle = '#FF5073'
-          ctx.fill()
-          // ctx.draw(20, 20, 50, 50)
-          ctx.font="60px Arial"
-          // ctx.setFillStyle('#FFFFFF')
-          ctx.fillStyle = '#FFFFFF'
-    
-          ctx.fillText("今天是"+canvasetext, c2*11/16, c2/10)
-          console.log(c2)
-          // ctx.fillText("今天是"+canvasetext, c2, 50)
-          if(canvaseNum==0){
-          }else if(canvaseNum<10){
-            ctx.fillText("第", c2*14/16, c2*5/20)
-            ctx.fillText(canvaseNum, c2, c2*5/20)
-            ctx.fillText("天", c2*17/16, c2*5/20)
-            }else{
-              ctx.fillText("第", c2*12/16, c2*5/20)
-              ctx.fillText(canvaseNum, c2, c2*5/20)
-              ctx.fillText("天", c2*18/16, c2*5/20)
-            }
-            ctx.scale(dpr, dpr)
-            // ctx.fill()
-            // ctx.fillRect(0, 0, 50, 50)
-      })
+    ctx.setFontSize(15)
+    ctx.setFillStyle('#FFFFFF')
+    ctx.fillText("今天是"+canvasetext, c2-24-22.5, c2/3-20)
+    if(canvaseNum==0){
+    }else if(canvaseNum<10){
+      ctx.fillText("第", c2-24, c2/3)
+      ctx.fillText(canvaseNum, c2-6, c2/3)
+      ctx.fillText("天", c2+6, c2/3)
+    }else{
+      ctx.fillText("第", c2-24, c2/3)
+      ctx.fillText(canvaseNum, c2-6, c2/3)
+      ctx.fillText("天", c2+15, c2/3)
+    }
+    ctx.draw()
 
     const weeks_ch = ['日', '一', '二', '三', '四', '五', '六'];
     //调用calculateEmptyGrids计算出当月空出几个格子，传入年和月
