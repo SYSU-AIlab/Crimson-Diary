@@ -1,16 +1,17 @@
 page {
   line-height: 2.0;
   font-family: -apple-system-font, "Helvetica Neue", sans-serif;
-  background: #EEEEEE;
+  background: #fcfcfc;
 }
 .page-body{
   width: 90%;
-  margin-top:10px;
+  margin-top:10rpx;  
+  margin-bottom: 10rpx; /* 缩短下边距 */
 }
 .save_btn{
   width: 50%;
-  margin-top: 50%;
-  background-color: #505cff;
+  margin-top: 10rpx;
+  background-color: #9fa5f5;
   color: #fff;
 }
 icon {
@@ -48,8 +49,9 @@ icon {
   margin-bottom: .3em;
   padding-left: 15px;
   padding-right: 15px;
-  color: #999999;
-  font-size: 14px;
+  color: #000000;
+  font-size: 18px;
+  font-weight: bold; /* 加粗字体 */
 }
 .weui-cells_after-title {
   margin-top: 0;
@@ -1052,3 +1054,44 @@ icon {
   color: #09BB07;
   white-space: nowrap;
 }
+
+.bg-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; /* 确保背景图片在内容的后面 */
+}
+
+.explaination {
+  text-align: center; /* 让文字居中 */
+  margin-top: 20rpx; /* 根据需要调整上边距 */
+}
+
+.exp_words {
+  font-size: 32rpx; /* 设置字体大小 */
+  color: #333; /* 设置字体颜色 */
+  line-height: 1; /* 设置行高，根据需要调整 */
+}
+
+/* 字体 */
+.fangsong {
+  font-family: "FangSong", sans-serif;
+}
+.kaiti {
+  font-family: "KaiTi", sans-serif;
+}
+.yahei {
+  font-family: "Microsoft YaHei", sans-serif;
+}
+.shei {
+  font-family: "SimHei", sans-serif;
+}
+.ssun {
+  font-family: "SimSun", sans-serif;
+}
+.stkt {
+  font-family: "STKaiti", sans-serif;
+}
+/* "Microsoft YaHei", "SimHei", "SimSun",  "KaiTi", "STKaiti" */

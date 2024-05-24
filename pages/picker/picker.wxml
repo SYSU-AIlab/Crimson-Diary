@@ -1,65 +1,69 @@
 <view class="container">
+  <image class="bg-image" src="cloud://cloud1-8ghk237mf77b9d98.636c-cloud1-8ghk237mf77b9d98-1325635063/image/bg/28.png" mode="aspectFill" style="opacity: 0.5;"></image>
   <view class="page-body">
     <view class="page-section">
 
-      <view class="weui-cells__title">请问您的年龄是多大？</view>
+      <view class="weui-cells__title fangsong">请问您的年龄是多大？</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
-            <view class="weui-label">年龄</view>
+            <view class="weui-label fangsong">年龄</view>
           </view>
           <view class="weui-cell__bd">
             <picker bindchange="bindPickerChange3" value="{{array3[age]}}" range="{{array3}}">
-              <view class="weui-input" >{{array3[age]}}</view>
+              <view class="weui-input fangsong" >{{array3[age]}}</view>
             </picker>
           </view>
         </view>
       </view>
 
 
-      <view class="weui-cells__title">您的月经大概持续几天？</view>
+      <view class="weui-cells__title fangsong">您的月经大概持续几天？</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
-            <view class="weui-label">经期长度</view>
+            <view class="weui-label fangsong">经期长度</view>
           </view>
           <view class="weui-cell__bd">
             <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-              <view class="weui-input" >{{array[index]}}</view>
+              <view class="weui-input fangsong" >{{array[index]}}</view>
             </picker>
           </view>
         </view>
       </view>
 
-      <view class="weui-cells__title">两次月经开始日大概间隔多久？</view>
+      <view class="weui-cells__title fangsong">两次月经开始日大概间隔多久？</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
-            <view class="weui-label">周期长度</view>
+            <view class="weui-label fangsong">周期长度</view>
           </view>
           <view class="weui-cell__bd">
             <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array2}}">
-              <view class="weui-input">{{array2[index2]}}</view>
+              <view class="weui-input fangsong">{{array2[index2]}}</view>
             </picker>
           </view>
         </view>
       </view>
 
-      <view class="weui-cells__title">最近一次月经大概是哪天来的？</view>
+      <view class="weui-cells__title fangsong">最近一次月经大概是哪天来的？</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
-            <view class="weui-label">最近一次月经</view>
+            <view class="weui-label fangsong fangsong">最近一次月经</view>
           </view>
-          <view class="weui-cell__bd">
+          <view class="weui-cell__bd fangsong">
           <!--滚轮范围是2015.9.1到当天的日期-->
             <picker mode="date" value="{{date}}" start="2015-09-01"  bindchange="bindDateChange">
-              <view class="weui-input">{{date}}</view>
+              <view class="weui-input fangsong">{{date}}</view>
             </picker>
           </view>
         </view>
       </view>
     </view>
+  </view>
+  <view class="explaination">
+    <text class="exp_words">（注意点击下方保存按钮记录您的经期哦）</text>
   </view>
   <button class="save_btn" bindtap="save_btn" data-jingqi_index="{{index}}" data-jinqi="{{array[index]}}" data-zhouqi_index="{{index2}}" data-zhouqi="{{array2[index2]}}"data-age_index="{{age}}" data-date="{{date}}"> 保存 </button>
 </view>
