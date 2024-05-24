@@ -1,21 +1,62 @@
-<view class="container">
-  <view class="header">小贴士指南</view>
-  <view class="grid">
-    <button class="grid-item" bindtap="navigateToLink" data-url="tip1">
-      <image src="/image/1.png" mode="aspectFit"></image>
-      经期的小知识
-    </button>
-    <button class="grid-item" bindtap="navigateToLink" data-url="tip2">
-      <image src="/image/2.png" mode="aspectFit"></image>
-      经期常见误区
-    </button>
-    <button class="grid-item" bindtap="navigateToLink" data-url="tip3">
-      <image src="/image/3.png" mode="aspectFit"></image>
-      经期激素变化
-    </button>
-    <button class="grid-item" bindtap="navigateToLink" data-url="tip4">
-      <image src="/image/4.png" mode="aspectFit"></image>
-      男友注意事项
-    </button>
-  </view>
-</view>
+@font-face{
+  font-family: "canger";
+  src: url('https://zf.sc.chinaz.com/Files/DownLoad/upload/2024/0201/cangeaiminxingkai.ttf')
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.header {
+  font-size: 50px;
+  color: #b8f3eb;
+  margin-bottom: 20px;
+  font-family: 'canger';
+  text-shadow: 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.5); /* 设置半透明背景 */
+  font-weight: bold;
+}
+
+.grid-item image {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 5px;
+}
+
+.bg-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; /* 确保背景图片在内容的后面 */
+}
