@@ -1,3 +1,136 @@
-{
-  "usingComponents": {}
+/* pages/call/call.wxss */
+
+page {
+  background: #FFE4E1;
+  color: #333;
+}
+
+.container {
+  padding: 20rpx;
+}
+
+.picker {
+  margin: 20rpx 0;
+  padding: 20rpx;
+  background: #81c1f5;
+  color: white;
+  border-radius: 10rpx;
+  text-align: center;
+  font-size: 32rpx;
+  cursor: pointer;
+}
+
+.districts {
+  margin: 20rpx 0;
+}
+
+.district {
+  padding: 20rpx;
+  background-color: #e0f7fa;
+  border-radius: 10rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+  font-size: 28rpx;
+  cursor: pointer;
+}
+
+.hospitals {
+  margin: 20rpx 0;
+}
+
+.hospital-list {
+  padding: 20rpx;
+  background-color: #f1f8e9;
+  border-radius: 10rpx;
+}
+
+.hospital {
+  padding: 20rpx;
+  background-color: #ffecb3;
+  border-radius: 10rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+  font-size: 28rpx;
+  cursor: pointer;
+}
+
+.hospital-details {
+  margin: 20rpx 0;
+  padding: 20rpx;
+  background-color: #fff3e0;
+  border-radius: 10rpx;
+}
+
+.hospital-details view {
+  margin-bottom: 10rpx;
+  font-size: 28rpx;
+}
+
+.phone-input {
+  width: 100%;
+  padding: 20rpx;
+  margin: 20rpx 0;
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  background: linear-gradient(45deg, #dfc6ce, #e7acc0);
+  color: white;
+  border: none;
+  border-radius: 50px; /* 增大圆角，使形状更加圆润 */
+  font-size: 32rpx;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+  transition: transform 0.2s, box-shadow 0.2s; /* 添加过渡效果 */
+}
+
+.submit-button:hover {
+  transform: scale(1.05); /* 鼠标悬停时放大按钮 */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* 鼠标悬停时增强阴影效果 */
+}
+
+.sos-button {
+  width: 100%;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  background: linear-gradient(45deg, #ee938c, #f7e0de); /* 红色系渐变 */
+  color: white;
+  border: none;
+  border-radius: 50px; /* 增大圆角，使形状更加圆润 */
+  font-size: 32rpx;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+  transition: transform 0.2s, box-shadow 0.2s; /* 添加过渡效果 */
+}
+
+.sos-button:hover {
+  transform: scale(1.05); /* 鼠标悬停时放大按钮 */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* 鼠标悬停时增强阴影效果 */
+}
+
+.bg-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; /* 确保背景图片在内容的后面 */
+}
+
+.explaination {
+  text-align: center; /* 让文字居中 */
+  margin-top: 20rpx; /* 根据需要调整上边距 */
+}
+
+.exp_words {
+  font-size: 24rpx; /* 设置字体大小 */
+  color: #333; /* 设置字体颜色 */
+  line-height: 1; /* 设置行高，根据需要调整 */
 }
