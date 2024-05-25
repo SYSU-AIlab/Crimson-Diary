@@ -1075,6 +1075,19 @@ icon {
   line-height: 1; /* 设置行高，根据需要调整 */
 }
 
+.exp_title {
+  font-size: 26rpx; /* 设置字体大小 */
+  color: rgb(143, 143, 143); /* 设置字体颜色 */
+  line-height: 1; /* 设置行高，根据需要调整 */
+  font-weight: bold; /* 加粗字体 */
+}
+
+.exp_words_ {
+  font-size: 22rpx; /* 设置字体大小 */
+  color: rgb(122, 118, 118); /* 设置字体颜色 */
+  line-height: 1; /* 设置行高，根据需要调整 */
+}
+
 /* 字体 */
 .fangsong {
   font-family: "FangSong", sans-serif;

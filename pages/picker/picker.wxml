@@ -66,4 +66,16 @@
     <text class="exp_words">（注意点击下方保存按钮记录您的经期哦）</text>
   </view>
   <button class="save_btn" bindtap="save_btn" data-jingqi_index="{{index}}" data-jinqi="{{array[index]}}" data-zhouqi_index="{{index2}}" data-zhouqi="{{array2[index2]}}"data-age_index="{{age}}" data-date="{{date}}"> 保存 </button>
+  <view class="explaination">
+    <text class="exp_title" style="display:block;">声明与提醒:</text>
+    <text class="exp_words_" style="display:block;">本APP仅供用户自行追踪月经周期，无法解决异常月经情况，如发生以下异常情况，请咨询医务人员。</text>
+    <text class="exp_words_" style="display:block;">- 月经突然停止超过 90 天，并且没有怀孕。-
+- 月经经过规律性周期后变得不规律。-
+- 月经出血超过七天。-
+- 月经量比平时多，或者每小时或每两小时就能浸透一片卫生巾或一根卫生棉条。-
+- 月经周期少于21天或多于35天。-
+- 两次经期之间出血。-
+- 经期剧烈疼痛，难以忍受。-
+- 使用卫生棉条后突然发热并感到恶心。-</text>
+  </view>
 </view>
