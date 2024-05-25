@@ -1,408 +1,202 @@
-# 微信小程序-月经管理
-## 简介
-微信作为国民级应用，在2017年1月9日推出微信小程序，目的是为了连接跟多的线下场景，业内人士对微信小程序的看法各有千秋，我个人认为，微信小程序想完全的替代原生Android应用是很困难的，树扎的深，风再大也很难把它吹倒，只要你原生的Android应用足够优秀，用户足够喜欢，你就不必太惊恐于微信小程序，而那些用户很少用，或者功能比较简单的原生Android应用就很有可能被微信小程序给取代。其实微信小程序并不是首创，百度在此之前已经做过类似的尝试，当然结局就是不了了之了，上面这些都不是本文的重点，这篇文章主要来讲讲从0开始快速开发一个比较完整的微信小程序
+<div align="center">
+<h1>策划案第2版</h1>
+[TOC]
 
-## 如何学习微信小程序？
-开发微信小程序其实并不难，我自身从0开始花了5天时间就做出了一个月经管理小程序，先来看看具体的效果
-首先是月经设置界面，用于设置月经的周期、长度和上次月经的时间
+Kevin Liao
 
-![月经设置](http://obfs4iize.bkt.clouddn.com/%E6%9C%88%E7%BB%8F%E8%AE%BE%E7%BD%AE.png)
+School of Intelligent Systems Engineering, Sun Yat-sen University
 
-设置完成后，就会通过简单的算法，显示出女性一个月内不同的生理期
+</div>
 
-![月经管理](http://obfs4iize.bkt.clouddn.com/%E6%9C%88%E7%BB%8F%E7%AE%A1%E7%90%86.png)
+<div align="center">
 
-如果只是单纯的月经管理，那么这个小程序的功能就显得比较单一，所以又开发一个内容列表，展示一些月经知识
+## 软件构想与立项
 
-![月经知识](http://obfs4iize.bkt.clouddn.com/%E6%9C%88%E7%BB%8F%E7%9F%A5%E8%AF%86.png)
+</div>
 
-![月经知识内容](http://obfs4iize.bkt.clouddn.com/%E6%9C%88%E7%BB%8F%E7%9F%A5%E8%AF%86%E5%86%85%E5%AE%B9.png)
+#### 项目名称——红潮日记（Crimson Diary）
+结合了经期的红色象征和日记的个人记录，暗示这是一个专注于女性经期记录和个人经历的应用。
 
-如何在比较短的时间内学会并使用这个新技术呢？我自己使用了5天左右的时间，首先可能因为我帅所以吸收的比较快，其次就是学习新技术也是有套路的
+<p align="center">
+  <img src="assets/设计灵感来源.png">
+</p>
 
-我的惯用套路就是，先看官方文档，微信小程序的官方文档比较全面，而且比较简单，没有什么深邃的内容，花2~3个小时把里面的内容大致的过一遍，有个大概的印象就好了，不要求你全部记住，知道有这个东西则可，然后混迹于比较成熟的技术论坛，直接Google微信小程序论坛，一搜一大堆，看看其他人使用微信小程序遇到什么问题，或者有什么比较好的第三方工具，然后就是从论坛上下载一些实战视频教程，我知道很多技术人员不推荐看视频教程来学习技术，觉得非常浪费时间，但是我觉得看实战教程还是有点用处的，当你看完文档对微信小程序有个模糊的了解后，弄一些视频来看，效果很不错，当然很多视频中老师的语速非常慢，所以我一般都是以2.5倍的速度来看的，遇到自己会的内容，就直接快进跳过，这样就可以快速的学会开发一个完整项目的流程，如果有一些比较好的项目源码，建议也要研究研究，我做完上面的工作用来1天左右的时间，接下来四天就是动手开发了，了解了这么多东西，如果不动手开发，不去遇到一些实际上的问题，是很难掌握前面学习的理论知识的，动手的重要性就不多讲了，总之很重要！
+#### 目的
+记录女性经期的相关信息，为经期正常或者紊乱的情况提供记录，方便女性判断自己的身心健康。另外，本产品还希望为正处于经期的女性提供一定的娱乐项目，同时，也为她本身或者她的无知男友提供一定的经期相关的知识。
+##### 本产品旨在为女性经期的身心健康提供一定的帮助。
 
-## 动手开发
-下面来简单的看看开发的逻辑，只给出代码片段，具体代码可以在文末找到下载链接，项目的结构如下
-![ayuLiao项目结构](http://obfs4iize.bkt.clouddn.com/ayuLiao%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png)
+#### 性质
+本产品的性质为非赢利导向的，以完成课程任务为基础的，不设功能与精美上限的微信小程序产品。（当然，最终能够实现一定的盈利、让开发者收获一定的软件开发能力也是极好的）
 
-首先是用于设置月经周期、长度和上次月经时间的设置界面，该界面使用了picker组件
-```
-picker
-从底部弹起的滚动选择器，现支持三种选择器，通过mode来区分，分别是普通选择器，时间选择器，日期选择器，默认是普通选择器。
-```
-设置完后，点击按钮，将设置完的数据保存到缓存中，然后跳转到当月生理期显示界面（代码在picker文件夹下）
+#### 定位
+本产品的定位为微信小程序，主要使用主题为开始出现月经以及尚未绝经的女性，或者该时期的女性的伴侣。
 
-```js
-save_btn(e) {
-    const date = e.currentTarget.dataset.date
-    const a = e.currentTarget.dataset.array
-    const a2 = e.currentTarget.dataset.arrayb
-    console.log(date, a, a2)
-    try {
-      //经期长度
-      wx.setStorageSync('jinqi', a)
-      //周期长度
-      wx.setStorageSync('zhouqi', a2)
-      //最近一次月经
-      wx.setStorageSync('zuijinriqi', date)
-    } catch (e) {
-    }
+#### 意义
+与目的有一定的相似性，在这里再次重申。
+身心健康监测和记录：通过记录经期相关信息，这个软件帮助女性更好地了解自己的身体状况和周期变化，从而更好地管理自己的健康。它能帮助用户识别不规律的周期或其他潜在的健康问题，并及时寻求医疗咨询，对于预防和早期发现健康问题具有重要意义。
+增强自我意识和自我关怀：该产品鼓励女性积极关注自己的生理和心理健康，增强自我意识。它通过提供经期相关知识和信息，帮助女性更好地理解自己的身体和情绪变化，从而采取适当的自我关怀措施。
+教育和提高意识：除了为女性用户提供帮助外，该软件还旨在为其他人群，如男性伴侣，提供教育，帮助他们更好地理解和支持女性在经期面临的身心挑战。这有助于提高社会对女性生理健康问题的认识和敏感性。
+情绪和压力管理：经期可能伴随情绪波动和身体不适，该产品通过提供娱乐项目和放松技巧，帮助女性在经期管理压力和情绪，提高她们的生活质量。
+促进社会和谐与理解：通过普及经期相关知识，该产品有助于减少因误解和偏见而产生的社会冲突，促进性别之间的理解和尊重，从而促进社会的整体和谐。
 
-    wx.switchTab({
-      url: '../calendar/calendar'
-    })
-  }
-```
-这里有三个点要注意
-1.这样通过data-Xxx来实现将wxml界面中的数据传递到js中，可以通过e.currentTarget.dataset.Xxx这段js代码获得相应的数据
-2.使用wx.setStorageSync(key, value)将数据存入缓存中，缓存中的数据将永久保存，除非用户卸载了微信，最多可以缓存10M的数据
-3.要跳转到tabBar指定的界面要使用wx.switchTab(OBJECT)，wx.navigateTo(OBJECT)只能跳转到tabBar指定之外的界面
+#### 规模
+本产品依托于微信小程序的开发环境，规模较小
 
-接着来看现实月经规律的界面，该界面分为3部分
+### 问题定义报告
 
-![经期管理3部分](http://obfs4iize.bkt.clouddn.com/%E7%BB%8F%E6%9C%9F%E7%AE%A1%E7%90%863%E9%83%A8%E5%88%86.png)
+##### 待开发的工程项目名称：红潮日记（Crimson Diary）
 
-第一个部分:在app.json文件中进行设置，实现这个tabBar
-```
-"tabBar": {
-    "backgroundColor": "#343",
-    "color": "#fff",
-    "list": [
-      {
-        "pagePath": "pages/calendar/calendar",
-        "text": "月经记录",
-        "iconPath": "image/1.png",
-        "selectedIconPath": "image/2.png"
-      },
-      {
-        "pagePath": "pages/lists/lists",
-        "text": "月经知识",
-        "iconPath": "image/3.png",
-        "selectedIconPath": "image/4.png"
-      },
-      {
-        "pagePath": "pages/picker/picker",
-        "text": "月经设置",
-        "iconPath": "image/2.png",
-        "selectedIconPath": "image/4.png"
-      }
-    ]
-  }
-```
-如果要重其他界面跳转到pagePath属性指定的界面要使用wx.switchTab(OBJECT)
+##### 软件项目使用的单位和部门：公众
 
-第二部分比较复杂，通过for循环和if判断将对应数组中的值渲染上去
-```xml
- <view class="days box box-lr box-wrap">
-      <!--当月空出的位置-->
-      <view wx:if="{{hasEmptyGrid}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
-      </view>
-      <!--当月空出的位置-->
-      <!--月数-->
-      <view class="grid white-color box box-align-center box-pack-center" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}">
-        <view wx:for="{{yue}}" wx:for-item="y">
-          <view wx:if="{{item == y}}">
-            <view class="day box box-align-center box-pack-center border-radius pink-bg">{{item}}</view>
-          </view>
-        </view>
-        <view wx:for="{{weixian}}" wx:for-item="w">
-          <view wx:if="{{item == w}}">
-            <view class="day box box-align-center box-pack-center border-radius purple-bg">{{item}}</view>
-          </view>
-        </view>
-        <view wx:for="{{anquan}}" wx:for-item="a">
-          <view wx:if="{{item == a}}">
-            <view class="day box box-align-center box-pack-center border-radius green-bg">{{item}}</view>
-          </view>
-        </view>
-        <view wx:if="{{item == pailuanri}}">
-          <view class="day box box-align-center box-pack-center border-radius orange-bg">{{item}}</view>
-        </view>
-        <!--月数-->
-      </view>
-    </view>
-  </view>
-```
-这里有5个数组，empytGrids数组表示渲染时要空出的位置，days数组表示这个月所有的天数，yue数组表示这个月月经的天数，weixian数组表示这个月危险期的天数，anquan数组表示这个月安全期的天数，使用不同的背景色渲染出来则可
+##### 软件项目开发单位：个人，廖宇轩、陈佳俊
 
-先来看一下如何获得empytGrids数组和days数组，代码如下
-```js
- // 获取当月共多少天，传年和月
-  getThisMonthDays(year, month) {
-    //通过Date来获取当月天数
-    return new Date(year, month, 0).getDate();
-  },
-  // 获取当月第一天星期几，传年和月
-  getFirstDayOfWeek(year, month) {
-    return new Date(Date.UTC(year, month - 1, 1)).getDay();
-  },
-  // 计算当月1号前空了几个格子
-  calculateEmptyGrids(year, month) {
-    const firstDayOfWeek = this.getFirstDayOfWeek(year, month);
-    let empytGrids = [];
-    if (firstDayOfWeek > 0) {
-      //将不渲染的添加进入empytGrids数组
-      for (let i = 0; i < firstDayOfWeek; i++) {
-        empytGrids.push(i);
-      }
-      this.setData({
-        hasEmptyGrid: true,
-        empytGrids
-      });
-    } else {
-      this.setData({
-        hasEmptyGrid: false,
-        empytGrids: []
-      });
-    }
-  },
-  // 绘制当月天数占的格子
-  calculateDays(year, month) {
-    let days = [];
-    //获得当月共有多少天
-    const thisMonthDays = this.getThisMonthDays(year, month);
-    for (let i = 1; i <= thisMonthDays; i++) {
-      days.push(i);
-    }
-    //设置当月天数
-    this.setData({
-      days
-    });
-  },
-```
-代码注释非常清楚，要获得empytGrids数组，先通过getFirstDayOfWeek()获得这个月的第一个天是星期几，因为wxml界面显示时是从星期日开始的，所以这个月第一天是星期一就要空一格，而要获得days数组，则通过getThisMonthDays()方法获得这个月的天数，然后循环赋值则可
+##### 问题的概括定义：对于正常女性，经期的时间应该有一定的规律，而该规律需要一些记录手段；对于公众而言，对于经期知识学习了解会存在一定的匮乏，需要一个能提供这些知识的平台；对于经期女性，可能会产生一些不佳的情绪，需要一定缓解的娱乐手段
 
-接着要获得yue数组、weixian数组和anquan数组，这里就要理解计算月经的算法，网上有很多在线月经计算器，在在线月经计算器旁一般都会有介绍如何简单的计算月经，其实就是通过上次月经的日期获得下次月经的日期，然后通过下次月经的日期减去14就可以获得排卵日，一般排卵日的前5天和后4天就是排卵期，在前面的月经设置界面，我们设置了月经长度、月经周期和上次月经的日期，通过这些信息就可以写出一个简单的算法，将这个月的日期分成3个部分
-```
-a:当前日期与初次月经的日期相差的天数再与月经周期取余
+##### 软件项目的用途和目标：记录经期，帮助解答经期问题，为经期女性提供一定的娱乐放松项目
 
-a<月经长度---->此时在月经期
+##### 软件开发的开始时间&预计交付使用时间：开始时间——2024.3.11；预计交付时间——2024.4.24。总的开发时间44天。
 
-月经长度<a<月经周期-14-5---->此时在安全期
+##### 软件项目可能投入的经费：目前来看，需要小程序的发行费用（暂时还未知）。
 
-月经周期-14-5<a<月经周期-14+4---->此时在排卵期
+##### 软件项目使用单位和开发单位双方确认信息等
 
-月经周期-14+4<a<月经周期---->此时在安全期
+<div align="center">
 
-```
-通过这个算法，就可以计算月经情况了，部分代码如下
-```js
-//计算天数差的函数
-  DateDiff(sDate1, sDate2) {    //sDate1和sDate2是2002-12-18格式  
-    var aDate, oDate1, oDate2, iDays
-    aDate = sDate1.split("-")
-    oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0])    //转换为12-18-2002格式  
-    aDate = sDate2.split("-")
-    oDate2 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0])
-    iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24)    //把相差的毫秒数转换为天数  
-    return iDays
-  },
+## 可行性分析
 
+</div>
 
-  //计算上一个月月经初潮的日期，用于判断,day为月经周期,yuejindate上次月经日期
-  oldyuejindate(yuejindate, day) {
-    var yue = yuejindate.split("-")
-    var yue2 = new Date(yue[0] + "/" + yue[1] + "/" + yue[2]);
-    var intValue = 0;
-    var endDate = null;
-    var days
-    //获得指定日期的毫秒数
-    intValue = yue2.getTime();
-    // console.log("hahhaha"+intValue)
-    intValue -= day * (24 * 3600 * 1000);
-    endDate = new Date(intValue);
-    days = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate()
-    // console.log("hahhaha"+days)
-    return days
-  },
-```
-DateDiff()方法用于计算两个日期间相差的天数，oldyuejindate()方法用于计算上一次初次月经的时间，之所以要编写oldyuejindate()方法是因为用户有时喜欢看几个月之前的月经规律，这样在月经设置界面设置的初次月经的日期就不能用了，该日期用于查看这个日期后的月份对应的月经规律，接着看代码
-```js
-viewyue(cur_year, cur_month) {
-    try {
-      //月经持续时间
-      var jinqi = wx.getStorageSync('jinqi');
-      //月经周期
-      var zhouqi = wx.getStorageSync('zhouqi');
-      //上次月经日期
-      var zuijinriqi = wx.getStorageSync('zuijinriqi');
-      if (zuijinriqi) {
-        // Do something with return value
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
-    //当前年月日
-    var date = new Date();
-    const day = date.getDate();
-    var nowday = cur_year + "-" + cur_month + "-" + day;
-    //将当月所有的日期都根据条件判断一下，然后放入不同的数组中
-    var y = 0, a = 0, w = 0;
-    var yuejinqi = [];
-    var anquanqi = [];
-    var weixianqi = [];
-    console.log(jinqi, zhouqi, date);
-    //月经日期对应的毫秒数
-    var zui = (new Date(zuijinriqi)).getTime();
-    for (let i = 1; i <= this.getThisMonthDays(cur_year, cur_month); i++) {
-      var yueday = cur_year + "-" + cur_month + "-" + i;
-      //比初始月经数据要小的日期，就使用前一次月经日期
-      if ((new Date(yueday)).getTime() < zui) {
-        var zuijinriqi2 = this.oldyuejindate(zuijinriqi, zhouqi * 100)
-        console.log(zuijinriqi2)
-        var datediff = this.DateDiff(yueday, zuijinriqi2) % zhouqi;
-      } else {
-        var datediff = this.DateDiff(yueday, zuijinriqi) % zhouqi;
-      }
-      //月经期
-      if (datediff < jinqi) {
-        yuejinqi.push(i)
-        // console.log("y" + datediff)
-        if (nowday == yueday) {
-          canvasetext = "月经期";
-          canvaseNum = datediff + 1;
-        }
-      }
-      if (jinqi <= datediff && datediff < zhouqi - 19) {
-        anquanqi.push(i)
-        if (nowday == yueday) {
-          canvasetext = "安全期";
-          canvaseNum = datediff - jinqi + 1;
-        }
-      }
-      if (zhouqi - 19 <= datediff && datediff < zhouqi - 10) {
-         if(datediff!=zhouqi-14){
-           weixianqi.push(i)
-         }
+#### 技术可行性
+##### 资源分析
+普通笔记本足以
+##### 技术分析
+需要完成的包括前端与后端
+相对而言，前端的工作要求一定的资源，图片、娱乐项目的具体内容等资源，并且对于现有的开发人员而言，前端技术接触的较少，可能需要花费较长的时间。
+后端工作主要集中于程序的编写，相对而言，开发人员拥有更多的经验。
+在实现层面，需要完成一下的具体工作：1、记录模块，包括一个日历部分、数字记录部分、自动分析部分；2、知识模块，主要是一些简单的问答系统；3、娱乐模块，初步设想的娱乐模块，包含的功能有小说阅读、小知识获取（类似简讯）、追星资讯、可爱动物鉴赏、绘画、轻音乐等（待补充，以图文为主要实现目标）；4、紧急模块，包括但不限于，紧急救助药物、大城市医院地址及求助电话等。
+##### 效率分析
+在目前的资源、人员、时间配置下，完成改项目可能存在一定困难。主要是时间不足。在这个基础上，有可能需要对一些功能进行缩减。
 
-         if(datediff==zhouqi-14){
-          this.setData({
-            pailuanri:i
-          })
-        }
-        if (nowday == yueday) {
-          canvasetext = "危险期";
-          canvaseNum = datediff - zhouqi + 20;
-        }
-      }
-      if (zhouqi - 10 <= datediff && datediff < 28) {
-        anquanqi.push(i)
-        if (nowday == yueday) {
-          canvasetext = "安全期";
-          canvaseNum = datediff - zhouqi + 11;
-        }
-      }
+#### 经济可行性
+该项目不考虑研发成本，也不需要运营、维护，在经济上充分可行。
+该项目存在发行的可能性，可能能够获利。（考虑到经期女性的情绪不够稳定，本产品坚定不接收广告的相关事项）
 
-    }
-    this.setData({
-      yue: yuejinqi,
-      anquan: anquanqi,
-      weixian: weixianqi
-    })
-  },
+#### 操作可行性
+绝大部分的用户应该都有使用微信的习惯，而小程序在此基础上使用非常的便利。
 
-```
-当我们要查看上一月下一个月时，就要刷新上面5个数组，从新渲染一遍
-```js
-// 切换控制年月
-  handleCalendar(e) {
-    const handle = e.currentTarget.dataset.handle;
-    const cur_year = this.data.cur_year;
-    const cur_month = this.data.cur_month;
-    //上一个月，点击了prev
-    if (handle === 'prev') {
-      let newMonth = cur_month - 1;
-      let newYear = cur_year;
-      //如果是一月月，就上一年
-      if (newMonth < 1) {
-        newYear = cur_year - 1;
-        newMonth = 12;
-      }
-      //获取当月天数
-      this.calculateDays(newYear, newMonth);
-      //获得当月要空的格子
-      this.calculateEmptyGrids(newYear, newMonth);
-      this.viewyue(newYear, newMonth)
-      this.setData({
-        cur_year: newYear,
-        cur_month: newMonth
-      })
+#### 社会可行性
+该产品在用户同意的情况下会收集其经期信息，并按照常规的网上收集的资料判断该经期规律是否属于正常范围。若用户不同意，本产品无法提供任何服务。除此外，不会收集用户其他信息。
 
-    } else {//下一个月
-      let newMonth = cur_month + 1;
-      let newYear = cur_year;
-      if (newMonth > 12) {
-        newYear = cur_year + 1;
-        newMonth = 1;
-      }
+<div align="center">
 
-      this.calculateDays(newYear, newMonth);
-      this.calculateEmptyGrids(newYear, newMonth);
-      this.viewyue(newYear, newMonth)
-      this.setData({
-        cur_year: newYear,
-        cur_month: newMonth
-      })
-    }
-  },
-```
+## 项目开发计划
 
-接着看到界面中第三个部分，一个曲形，实现这个非常简单，使用canvas绘制一个大圆，让界面显示大圆的一部分则可，然后同样通过canvas将相应的文字绘制上去，看了微信小程序文档，没有获得绘制文字长度的方法，所以为了让界面好看就自己调整了一下文字放置的位置，具体代码如下
-```js
-// 初始化数据
-  onShow(options) {
+</div>
 
-    const date = new Date();
-    const cur_year = date.getFullYear();
-    const cur_month = date.getMonth() + 1;
-    this.viewyue(cur_year, cur_month)
+### 阶段分析（下面进行了简短粗略的计划，在实际阶段中，需要更细致的划分）
+时间安排为前三周学习，第四周开始一起做，最后的ddl为4.24
 
-    var canvasewidth = this.getSystemInfo()
-    //canvas绘图
-    const ctx = wx.createCanvasContext('ayuCanvas')
-    //屏幕宽度的一半
-    var c2 = canvasewidth / 2
-    // 花园
-    ctx.arc(c2, -c2 * 2, c2 * 3, 0, 2 * Math.PI)
-    ctx.setFillStyle('#FF5073')
-    ctx.fill()
+#### 阶段1：前端设计，预计花费时间2周，ddl：3.30
+##### 内容：
+界面的设计
+4个页面，需要考虑——页面的排布，图片的使用，页面的颜色风格，文字设计等等。
 
-    ctx.setFontSize(15)
-    ctx.setFillStyle('#FFFFFF')
-    ctx.fillText(canvasetext, c2-24, c2/3-20)
-    ctx.setFontSize(50)
-    if(canvaseNum<10){
-       ctx.fillText(canvaseNum, c2-15, c2-40)
-        ctx.setFontSize(15)
-    ctx.fillText("天", c2+20, c2-40)
-    }else{
-      ctx.fillText(canvaseNum, c2-25, c2-40)
-       ctx.setFontSize(15)
-    ctx.fillText("天", c2+35, c2-40)
-    }
-    ctx.draw()
+##### 里程碑:
+完成页面的设计工作，大部分完整，小部分需要调整。
 
-    const weeks_ch = ['日', '一', '二', '三', '四', '五', '六'];
-    //调用calculateEmptyGrids计算出当月空出几个格子，传入年和月
-    this.calculateEmptyGrids(cur_year, cur_month);
-    //调用calculateDays计算当月的天数
-    this.calculateDays(cur_year, cur_month);
-    //获得系统消息
-    this.getSystemInfo();
-    this.setData({
-      cur_year,
-      cur_month,
-      weeks_ch
-    })
-  },
-```
-这样，月经规律显示界面就完成了，至于wcss代码就不展示出来了，太占篇幅，其实跟css十分相似，这篇就先将到这里，下一篇接着将月经知识展示列表的制作
+##### 资源划分：
+廖宇轩：主要负责前三个页面的设计与实现。需要学习一定的爬虫技术。
+陈佳俊：主要负责资源的收集以及第四个页面的实现，对于设计的页面进行评估。
 
-下一篇文章，会发布到我博客和微信公众号上
+#### 阶段2：后端技术实现，预计花费时间3周，ddl：4.20
+##### 内容：
+完成4个页面内各个功能的实现
+对于第一个页面，也即经期记录页面，需要实现的包括动态的日历信息；数字记录的精准计算；根据相关的经期信息，以及网上的资料判断经期是否合理。
+对于第二个页面，经期知识问答系统，主要实现页面的跳转，这部分需要收集一定的资料。
+对于第三个页面，娱乐板块，需要实现的重点有小说阅读（需要收集网络资料），轻音乐（需要20~50首歌）等（其他部分暂不考虑）。
+第四个页面，紧急求助模块，不需要后端实现。
 
-博客：lmwen.top
+##### 里程碑:
+完成上述的各个功能，能够与前端的页面基本对应，存在一些小错误或者为实现的功能。
 
-微信公众号:懒写作
+##### 资源划分：
+暂时未定。
 
-![懒写作](http://obfs4iize.bkt.clouddn.com/%E6%87%92%E5%86%99%E4%BD%9C.jpg)
+#### 阶段3：整合、提高、测试、发行，预计时间4天，ddl：4.24
+##### 内容：
+解决前后端存在的bug，将前端的页面进行美化，结合前后端完善更多的娱乐功能。在微信小程序中进行发行。
+
+##### 里程碑:
+完成项目设计以及发行工作。
+
+##### 资源划分：
+暂时未定。
+
+### 开发计划档案
+##### 项目概述
+功能——记录经期，传授经期知识，为经期女性提供娱乐
+类型——工具类、微信小程序
+性能——无法评估
+项目所使用的语言——未知，还没学到
+存储形式——存储于两位开发人员的pc中
+
+##### 项目实施计划
+计划与进度安排在前文已经讨论；负责人均为廖宇轩；预算暂且不计，也未知
+
+##### 项目人员配置
+项目安排两个人，分工任务量大约是6：4或7：3
+
+##### 项目交付日期
+4.24前
+
+### 开发计划评审，交由陈佳俊负责
+
+<div align="center">
+
+## 需求分析
+
+需求获取、需求建模、需求规格说明、需求评审、需求变更（严格的版本管理制度）、需求跟踪、需求状态分析
+
+</div>
+
+记录女性经期的相关信息，为经期正常或者紊乱的情况提供记录，方便女性判断自己的身心健康。另外，本产品还希望为正处于经期的女性提供一定的娱乐项目，同时，也为她本身或者她的无知男友提供一定的经期相关的知识。
+##### 本产品旨在为女性经期的身心健康提供一定的帮助。
+### 下面的部分不再做具体分析，需要一定的调研来进一步完善需求（咨询女性）
+#### 业务需求（立项的主要研发目的，开发系统的主要目标）
+
+#### 用户需求（除了业务需求外，用户需求的其他需求）
+
+#### 功能需求（除了业务与用户需求，软件系统提供的其他系统功能）
+
+#### 非功能性需求（用户对于软件系统质量和特性的额外需求）
+##### 过程需求
+##### 产品需求
+##### 外部法规需求
+
+<div align="center">
+
+## 软件设计
+
+模块化与模块独立
+
+</div>
+
+<p align="center">
+  <img src="assets/软件设计框架图.jpg">
+</p>
+
+#### 软件体系结构
+
+#### 数据描述
+
+#### 软件构建与接口
+
+#### 软件系统组成
+
+#### 概要设计（总体设计）：软件设计、数据结构、数据存储结构、人机交互界面、通信协议
+##### 结构化方法概要设计
+##### 面向对象概要设计
+
+#### 详细设计：系统的文件组成、系统组成、系统部署
+
+#### 软件复审
